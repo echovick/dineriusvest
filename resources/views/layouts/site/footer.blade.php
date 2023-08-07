@@ -7,7 +7,7 @@
                         <img class="uk-display-block" src="{{ asset('img/logo.png') }}"
                             alt="footer-logo" width="134" height="23" data-uk-img="">
                     </div>
-                    <p class="uk-text-large uk-margin-small-top">Trade with financial thinking.</p>
+                    <p class="uk-text-large uk-margin-small-top">Invest with financial thinking.</p>
                     <p class="uk-visible@m">Imperium Tower (Headquarters)<br>
                         Jl. Prof Dr Satrio, Kuningan<br>
                         12920<br>
@@ -51,7 +51,7 @@
                         (CFDs). Trading these products involves a high level of risk, as leverage can amplify both
                         potential gains and losses. It is important to carefully consider your investment goals and risk
                         tolerance before engaging in trading activities. Please ensure that you fully comprehend the
-                        risks associated with these financial products and trade responsibly with funds you can afford
+                        risks associated with these financial products and invest responsibly with funds you can afford
                         to lose. Prioritize your understanding of secure and responsible trading practices before
                         proceeding.</a></p>
                     <hr>

@@ -12,7 +12,7 @@
         content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers." />
     <link rel="shortcut icon" href="{{ asset('dashboard/images/favicon.png') }}" />
     <title>Investment Dashboard | Deneriusvest Admin Template</title>
-    <link rel="stylesheet" href="{{ asset('dashboard/assets/css/DashLitedeae.css?ver=3.2.1') }}" />
+    <link rel="stylesheet" href="{{ asset('dashboard/assets/css/dashlitedeae.css?ver=3.2.1') }}" />
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/css/themedeae.css?ver=3.2.1') }}" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91615293-4"></script>
     <script>

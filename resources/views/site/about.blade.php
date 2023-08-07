@@ -55,7 +55,7 @@
                                         <a class="uk-accordion-title" href="#">Our Technology</a>
                                         <div class="uk-accordion-content">
                                             <p>Unlike many competitors relying on off-the-shelf technology, we've built our entire ecosystem with a client-centric approach. From portfolio management to trading infrastructure, our technology aims to maximize client returns. </p>
-                                            <p>Our proprietary technology enables netting client trades, reducing market volume and associated costs. We were the first to offer fractional shares for ETFs, unlocking diversification benefits for all investors.</p>
+                                            <p>Our proprietary technology enables netting client investments, reducing market volume and associated costs. We were the first to offer fractional shares for ETFs, unlocking diversification benefits for all investors.</p>
                                         </div>
                                     </li>
 
