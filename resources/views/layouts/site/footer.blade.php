@@ -8,10 +8,11 @@
                             alt="footer-logo" width="134" height="23" data-uk-img="">
                     </div>
                     <p class="uk-text-large uk-margin-small-top">Invest with financial thinking.</p>
-                    <p class="uk-visible@m">Imperium Tower (Headquarters)<br>
-                        Jl. Prof Dr Satrio, Kuningan<br>
-                        12920<br>
-                        Jakarta - Indonesia
+                    <p class="uk-visible@m">4 Kinnoull Street, Perth, Scotland, PH1 5EN. United Kingdom.                         <br>
+                        311 S WACKER DR<br>
+                        CHICAGO<br>
+                        60606<br>
+                        IL - United States
                     </p>
                 </div>
                 <div class="uk-width-3-5@m">
