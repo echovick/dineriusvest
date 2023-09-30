@@ -5,6 +5,7 @@ use App\Http\Controllers\Account\InvestmentController;
 use App\Http\Controllers\Account\SetupAccountController;
 use App\Http\Controllers\Account\VerifyAccountController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\UserMetaDataController;
 use Illuminate\Support\Facades\Route;
@@ -41,11 +42,22 @@ Route::group(['prefix' => ''], function () {
 });
 
 Route::group(['prefix' => 'account', 'middleware' => 'auth'], function () {
+    Route::post('/investment/subscribe', [InvestmentController::class, 'subscribeNewInvestment'])->name('dashboard.investment.subscribe');
+
     Route::post('/complete-setup', [UserMetaDataController::class, 'store'])->name('dashboard.submit-setup-account');
     Route::get('', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/verify-kyc', [VerifyAccountController::class, 'index'])->name('dashboard.verify-kyc');
     Route::get('/verify-email', [VerifyAccountController::class, 'verifyEmail'])->name('dashboard.verify-email');
     Route::get('/complete-setup', [SetupAccountController::class, 'index'])->name('dashboard.setup-account');
     Route::get('/pending-profile-completion', [SetupAccountController::class, 'pendingProfileCompletion'])->name('dashboard.pending-profile-completion');
-    Route::get('/investments', [InvestmentController::class, 'index'])->name('dashboard.sinvestments');
+    Route::get('/investments', [InvestmentController::class, 'index'])->name('dashboard.investments');
+    Route::get('/investment/{id}', [InvestmentController::class, 'show'])->name('dashboard.investmentInfo');
+    Route::get('/investment/subscribed/{id}', [InvestmentController::class, 'showSubscribedDetails'])->name('dashboard.userInvestmentInfo');
+    Route::get('/investment-category/{id}', [InvestmentController::class, 'investmentCategoryDetails'])->name('dashboard.investmentCategoryDetails');
+    Route::get('/investment/{id}/new', [InvestmentController::class, 'newInvestmentForm'])->name('dashboard.investment.new');
+    Route::get('/products', [ProductController::class, 'index'])->name('dashboard.investment.products');
+
+    // Switch account type
+    Route::post('toggle-active-account', [DashboardController::class, 'toggleActiveAccount'])->name('dashboard.toggleActiveAccount');
+    Route::post('refresh-demo-balance', [DashboardController::class, 'refreshDemoBalance'])->name('dashboard.refreshDemoBalance');
 });

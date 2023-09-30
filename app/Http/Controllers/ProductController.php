@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -13,7 +14,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        // Get user
+        $user = Auth::user();
+
+        $products = Product::all();
+
+        return view('dashboard.products', compact('user', 'products'));
     }
 
     /**

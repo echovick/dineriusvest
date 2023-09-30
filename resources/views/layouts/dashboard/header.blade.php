@@ -24,6 +24,42 @@
         gtag("js", new Date());
         gtag("config", "UA-91615293-4");
     </script>
+    <script>
+        // JavaScript to toggle the switch state
+        function toggleSwitchAndSubmit(switchElement) {
+            switchElement.classList.toggle('on');
+
+            // Submit the form
+            const form = document.getElementById('toggleForm'); // Replace 'myForm' with your form's ID
+            form.submit();
+        }
+    </script>
+    <style>
+        /* Custom styles for the toggle switch */
+        .toggle-switch {
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            background-color: #ccc;
+            border-radius: 30px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .toggle-switch .toggle-handle {
+            width: 20px;
+            height: 20px;
+            background-color: #f4bd0e;
+            border-radius: 50%;
+            position: absolute;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .toggle-switch.on .toggle-handle {
+            transform: translateX(20px);
+            background-color: #1ee0ac;
+        }
+    </style>
 </head>
 
 <body class="nk-body npc-invest bg-lighter">
@@ -37,9 +73,8 @@
                                     class="icon ni ni-menu"></em></a>
                         </div>
                         <div class="nk-header-brand">
-                            <a href="{{ url('account') }}" class="logo-link"><img
-                                    class="logo-light logo-img" src="img/logo.png"
-                                    srcset="/demo6/images/logo2x.png 2x" alt="logo" /><img
+                            <a href="{{ url('account') }}" class="logo-link"><img class="logo-light logo-img"
+                                    src="img/logo.png" srcset="/demo6/images/logo2x.png 2x" alt="logo" /><img
                                     class="logo-dark logo-img" src="img/logo.png"
                                     srcset="/demo6/images/logo-dark2x.png 2x" alt="logo-dark" /><span
                                     class="nio-version">Invest</span></a>
@@ -47,11 +82,9 @@
                         <div class="nk-header-menu" data-content="headerNav">
                             <div class="nk-header-mobile">
                                 <div class="nk-header-brand">
-                                    <a href="{{ url('account') }}" class="logo-link"><img
-                                            class="logo-light logo-img" src="img/logo.png"
-                                            srcset="/demo6/images/logo2x.png 2x" alt="logo" /><img
-                                            class="logo-dark logo-img"
-                                            src="img/logo.png"
+                                    <a href="{{ url('account') }}" class="logo-link"><img class="logo-light logo-img"
+                                            src="img/logo.png" srcset="/demo6/images/logo2x.png 2x"
+                                            alt="logo" /><img class="logo-dark logo-img" src="img/logo.png"
                                             srcset="/demo6/images/logo-dark2x.png 2x" alt="logo-dark" /><span
                                             class="nio-version">Invest</span></a>
                                 </div>
@@ -70,21 +103,15 @@
                                             class="nk-menu-text">My Investments</span></a>
                                 </li>
                                 <li class="nk-menu-item active has-sub">
-                                    <a href="#" class="nk-menu-link nk-menu-toggle"><span
+                                    <a href="{{ route('dashboard.investment.products') }}" class="nk-menu-link nk-menu-toggle"><span
                                             class="nk-menu-text">Investment Options</span></a>
                                     <ul class="nk-menu-sub">
+                                        @foreach ($productCategory as $category)
                                         <li class="nk-menu-item">
-                                            <a href="welcome.html" class="nk-menu-link"><span
-                                                    class="nk-menu-text">Long Term Investment Portfolios</span></a>
+                                            <a href="{{ route('dashboard.investmentCategoryDetails', $category->id) }}" class="nk-menu-link"><span class="nk-menu-text">
+                                                    {{ $category->name }}</span></a>
                                         </li>
-                                        <li class="nk-menu-item">
-                                            <a href="invest-form.html" class="nk-menu-link"><span
-                                                    class="nk-menu-text">DIC Strategy Investment</span></a>
-                                        </li>
-                                        <li class="nk-menu-item">
-                                            <a href="scheme-details.html" class="nk-menu-link"><span
-                                                    class="nk-menu-text">Alternative Investment</span></a>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </li>
                                 <li class="nk-menu-item active has-sub">
@@ -259,7 +286,7 @@
                                                     Verified
                                                 </div>
                                                 <div class="user-name dropdown-indicator">
-                                                    Your Account
+                                                    {{ ucwords($user->wallet->active_account) }} Account
                                                 </div>
                                             </div>
                                         </div>
@@ -267,11 +294,37 @@
                                     <div
                                         class="dropdown-menu dropdown-menu-md dropdown-menu-end dropdown-menu-s1 is-light">
                                         <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                            <div class="uk-container d-flex justify-content-between mb-1">
+                                                <div>
+                                                    <span>Account Type:
+                                                        @if ($user->wallet->active_account === 'live')
+                                                            <span class="badge bg-success">LIVE</span>
+                                                        @else
+                                                            <span class="badge bg-warning">DEMO</span>
+                                                        @endif
+                                                    </span>
+                                                </div>
+                                                <!-- Toggle switch markup -->
+                                                <form id="toggleForm" method="POST"
+                                                    action="{{ route('dashboard.toggleActiveAccount') }}">
+                                                    @csrf
+                                                    <input type="text" name="wallet_id" id=""
+                                                        value="{{ $user->wallet->id }}" hidden>
+                                                    <input type="text" name="active_account"
+                                                        value="{{ $user->wallet->active_account === 'live' ? 'demo' : 'live' }}"
+                                                        id="" hidden>
+                                                    <div class="toggle-switch {{ $user->wallet->active_account === 'live' ? 'on' : '' }}"
+                                                        onclick="toggleSwitchAndSubmit(this)">
+                                                        <div class="toggle-handle"></div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <hr>
                                             <div class="user-card">
                                                 <div class="user-avatar"><span>AB</span></div>
                                                 <div class="user-info">
-                                                    <span class="lead-text">Abu Bin Ishtiyak</span><span
-                                                        class="sub-text">info@Deneriusvest.com</span>
+                                                    <span class="lead-text">{{ $user->profile->first_name }} {{ $user->profile->last_name }}</span><span
+                                                        class="sub-text">{{ $user->email }}</span>
                                                 </div>
                                                 <div class="user-action">
                                                     <a class="btn btn-icon me-n2" href="profile-setting.html"><em
@@ -279,30 +332,34 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="dropdown-inner user-account-info">
                                             <h6 class="overline-title-alt">Account Balance</h6>
                                             <div class="user-balance">
-                                                1,494.23
+                                                @if ($user->wallet->active_account === 'live')
+                                                ${{ number_format($user?->wallet?->balance_after, 2) ?? 0 }}
+                                                @else
+                                                ${{ number_format($user?->wallet?->demo_balance_after, 2) ?? 0 }}
+                                                @endif
                                                 <small class="currency currency-usd">USD</small>
                                             </div>
                                             <div class="user-balance-sub">
                                                 Locked
-                                                <span>15,495.39
+                                                <span>0.00
                                                     <span class="currency currency-usd">USD</span></span>
                                             </div>
-                                            <a href="#" class="link"><span>Withdraw Balance</span>
-                                                <em class="icon ni ni-wallet-out"></em></a>
+                                            @if ($user->wallet->active_account === 'live')
+                                                <a href="#" class="link"><span>Withdraw Balance</span>
+                                                    <em class="icon ni ni-wallet-out"></em></a>
+                                            @else
+                                                <form action="{{ route('dashboard.refreshDemoBalance') }}" method="POST" class="mt-2">
+                                                    @csrf
+                                                    <button class="btn btn-primary btn-sm">Refresh Balance</button>
+                                                </form>
+                                            @endif
                                         </div>
                                         <div class="dropdown-inner">
                                             <ul class="link-list">
-                                                <li>
-                                                    <a href="profile.html"><em
-                                                            class="icon ni ni-user-alt"></em><span>Active Investments</span></a>
-                                                </li>
-                                                <li>
-                                                    <a href="profile.html"><em
-                                                            class="icon ni ni-user-alt"></em><span>Transactions</span></a>
-                                                </li>
                                                 <li>
                                                     <a href="profile-activity.html"><em
                                                             class="icon ni ni-activity-alt"></em><span>Login
@@ -314,13 +371,9 @@
                                                             Profile</span></a>
                                                 </li>
                                                 <li>
-                                                    <a href="profile-setting.html"><em
-                                                            class="icon ni ni-setting-alt"></em><span>Account
-                                                            Setting</span></a>
-                                                </li>
-                                                <li>
                                                     <a href="profile-activity.html"><em
-                                                            class="icon ni ni-activity-alt"></em><span>Earn Rewards</span></a>
+                                                            class="icon ni ni-activity-alt"></em><span>Earn
+                                                            Rewards</span></a>
                                                 </li>
                                             </ul>
                                         </div>

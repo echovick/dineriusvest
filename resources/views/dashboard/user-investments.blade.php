@@ -29,7 +29,8 @@
                                                 <em class="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a>
                                         </li>
                                         <li>
-                                            <a href="#" class="btn btn-white btn-light"><span>Invest More</span>
+                                            <a href="{{ route('dashboard.investment.new', 1) }}"
+                                                class="btn btn-white btn-light"><span>Invest More</span>
                                                 <em class="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a>
                                         </li>
                                         <li class="opt-menu-md dropdown">
@@ -65,7 +66,7 @@
                                                     <div class="nk-iv-wg3-sub">
                                                         <div class="nk-iv-wg3-amount">
                                                             <div class="number">
-                                                                {{ number_format($allUserInvestments->sum('invested_amount')) }}
+                                                                {{ number_format($allUserInvestments->sum('invested_amount'), 2) }}
                                                                 <small class="currency currency-usd">USD</small>
                                                             </div>
                                                         </div>
@@ -87,7 +88,9 @@
                                                     <div class="nk-iv-wg3-sub-group gx-4">
                                                         <div class="nk-iv-wg3-sub">
                                                             <div class="nk-iv-wg3-amount">
-                                                                <div class="number">${{ number_format($allUserInvestmentsThisMonth->sum('current_profit_amount')) }}</div>
+                                                                <div class="number">
+                                                                    ${{ number_format($allUserInvestmentsThisMonth->sum('current_profit_amount'), 2) }}
+                                                                </div>
                                                             </div>
                                                             <div class="nk-iv-wg3-subtitle">
                                                                 Total Profit
@@ -97,7 +100,8 @@
                                                             <span class="nk-iv-wg3-plus text-soft"><em
                                                                     class="icon ni ni-plus"></em></span>
                                                             <div class="nk-iv-wg3-amount">
-                                                                <div class="number-sm">${{ number_format($todayProfitSum) }}</div>
+                                                                <div class="number-sm">${{ number_format($todayProfitSum,2) }}
+                                                                </div>
                                                             </div>
                                                             <div class="nk-iv-wg3-subtitle">
                                                                 Today Profit
@@ -141,93 +145,72 @@
                         <div class="nk-block-head-sm">
                             <div class="nk-block-head-content">
                                 <h5 class="nk-block-title">
-                                    Active Plan <span class="count text-base">(2)</span>
+                                    Active Plan <span class="count text-base">({{ $allUserInvestments->count() }})</span>
                                 </h5>
                             </div>
                         </div>
                         <div class="nk-iv-scheme-list">
-                            <div class="nk-iv-scheme-item">
-                                <div class="nk-iv-scheme-icon is-running">
-                                    <em class="icon ni ni-update"></em>
-                                </div>
-                                <div class="nk-iv-scheme-info">
-                                    <div class="nk-iv-scheme-name">
-                                        Silver - Daily 4.76% for 21 Days
+                            @if ($allActiveUserInvestments)
+                                @foreach ($allActiveUserInvestments as $activeInvestment)
+                                    <div class="nk-iv-scheme-item">
+                                        <div class="nk-iv-scheme-icon is-running">
+                                            <em class="icon ni ni-update"></em>
+                                        </div>
+                                        <div class="nk-iv-scheme-info">
+                                            <div class="nk-iv-scheme-name">
+                                                {{ $activeInvestment->product->name }} - Daily
+                                                {{ ($activeInvestment->daily_profit_amount/$userProduct->invested_amount) * 100 }}% for
+                                                {{ $activeInvestment->product->tenor }}
+                                            </div>
+                                            <div class="nk-iv-scheme-desc">
+                                                Invested Amount - <span
+                                                    class="amount">${{ $activeInvestment->invested_amount }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="nk-iv-scheme-term">
+                                            <div class="nk-iv-scheme-start nk-iv-scheme-order">
+                                                <span class="nk-iv-scheme-label text-soft">Start Date</span><span
+                                                    class="nk-iv-scheme-value date">{{ \Carbon\Carbon::parse($activeInvestment->start_at)->format('M d, Y') }}</span>
+                                            </div>
+                                            <div class="nk-iv-scheme-end nk-iv-scheme-order">
+                                                <span class="nk-iv-scheme-label text-soft">End Date</span><span
+                                                    class="nk-iv-scheme-value date">{{ \Carbon\Carbon::parse($activeInvestment->end_at)->format('M d, Y') }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="nk-iv-scheme-amount">
+                                            <div class="nk-iv-scheme-amount-a nk-iv-scheme-order">
+                                                @php
+                                                    // Get capital
+                                                    $capital = $activeInvestment->current_balance;
+
+                                                    // Get profit
+                                                    $profit = ($activeInvestment->daily_profit_amount / 100) * $capital;
+
+                                                @endphp
+                                                <span class="nk-iv-scheme-label text-soft">Total Return</span><span
+                                                    class="nk-iv-scheme-value amount">$ {{ $capital + $profit }}</span>
+                                            </div>
+                                            <div class="nk-iv-scheme-amount-b nk-iv-scheme-order">
+                                                <span class="nk-iv-scheme-label text-soft">Net Profit Earn</span><span
+                                                    class="nk-iv-scheme-value amount">$ {{ $profit }}
+                                                    <span class="amount-ex">~ ${{ $profit + 90 }}</span></span>
+                                            </div>
+                                        </div>
+                                        <div class="nk-iv-scheme-more">
+                                            <a class="btn btn-icon btn-lg btn-round btn-trans"
+                                                href="{{ route('dashboard.userInvestmentInfo', $activeInvestment?->id) }}"><em
+                                                    class="icon ni ni-forward-ios"></em></a>
+                                        </div>
+                                        <div class="nk-iv-scheme-progress">
+                                            <div class="progress-bar" data-progress="25"></div>
+                                        </div>
                                     </div>
-                                    <div class="nk-iv-scheme-desc">
-                                        Invested Amount - <span class="amount">$250</span>
-                                    </div>
+                                @endforeach
+                            @else
+                                <div class="alert alert-info">
+                                    <p>No Active Investments</p>
                                 </div>
-                                <div class="nk-iv-scheme-term">
-                                    <div class="nk-iv-scheme-start nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">Start Date</span><span
-                                            class="nk-iv-scheme-value date">Nov 04, 2019</span>
-                                    </div>
-                                    <div class="nk-iv-scheme-end nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">End Date</span><span
-                                            class="nk-iv-scheme-value date">Nov 25, 2019</span>
-                                    </div>
-                                </div>
-                                <div class="nk-iv-scheme-amount">
-                                    <div class="nk-iv-scheme-amount-a nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">Total Return</span><span
-                                            class="nk-iv-scheme-value amount">$ 499.99</span>
-                                    </div>
-                                    <div class="nk-iv-scheme-amount-b nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">Net Profit Earn</span><span
-                                            class="nk-iv-scheme-value amount">$ 97.95
-                                            <span class="amount-ex">~ $152.04</span></span>
-                                    </div>
-                                </div>
-                                <div class="nk-iv-scheme-more">
-                                    <a class="btn btn-icon btn-lg btn-round btn-trans" href="scheme-details.html"><em
-                                            class="icon ni ni-forward-ios"></em></a>
-                                </div>
-                                <div class="nk-iv-scheme-progress">
-                                    <div class="progress-bar" data-progress="25"></div>
-                                </div>
-                            </div>
-                            <div class="nk-iv-scheme-item">
-                                <div class="nk-iv-scheme-icon is-running">
-                                    <em class="icon ni ni-update"></em>
-                                </div>
-                                <div class="nk-iv-scheme-info">
-                                    <div class="nk-iv-scheme-name">
-                                        Silver - Daily 4.76% for 21 Days
-                                    </div>
-                                    <div class="nk-iv-scheme-desc">
-                                        Invested Amount - <span class="amount">$1,250</span>
-                                    </div>
-                                </div>
-                                <div class="nk-iv-scheme-term">
-                                    <div class="nk-iv-scheme-start nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">Start Date</span><span
-                                            class="nk-iv-scheme-value date">Oct 30, 2019</span>
-                                    </div>
-                                    <div class="nk-iv-scheme-end nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">End Date</span><span
-                                            class="nk-iv-scheme-value date">Nov 19, 2019</span>
-                                    </div>
-                                </div>
-                                <div class="nk-iv-scheme-amount">
-                                    <div class="nk-iv-scheme-amount-a nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">Total Return</span><span
-                                            class="nk-iv-scheme-value amount">$ 2,500</span>
-                                    </div>
-                                    <div class="nk-iv-scheme-amount-b nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">Net Profit Earn</span><span
-                                            class="nk-iv-scheme-value amount">$ 1145.25
-                                            <span class="amount-ex">~ $105.75</span></span>
-                                    </div>
-                                </div>
-                                <div class="nk-iv-scheme-more">
-                                    <a class="btn btn-icon btn-lg btn-round btn-trans" href="scheme-details.html"><em
-                                            class="icon ni ni-forward-ios"></em></a>
-                                </div>
-                                <div class="nk-iv-scheme-progress">
-                                    <div class="progress-bar" data-progress="90"></div>
-                                </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                     <div class="nk-block nk-block-lg">
@@ -235,7 +218,8 @@
                             <div class="nk-block-between">
                                 <div class="nk-block-head-content">
                                     <h5 class="nk-block-title">
-                                        Recently End <span class="count text-base">(1)</span>
+                                        Recently End <span
+                                            class="count text-base">({{ $allEndedUserInvestments->count() }})</span>
                                     </h5>
                                 </div>
                                 <div class="nk-block-head-content">
@@ -244,82 +228,74 @@
                             </div>
                         </div>
                         <div class="nk-iv-scheme-list">
-                            <div class="nk-iv-scheme-item">
-                                <div class="nk-iv-scheme-icon is-done">
-                                    <em class="icon ni ni-offer"></em>
+                            @if ($allEndedUserInvestments)
+                                @foreach ($allEndedUserInvestments as $inactiveInvestment)
+                                    <div class="nk-iv-scheme-item">
+                                        <div class="nk-iv-scheme-icon is-running">
+                                            <em class="icon ni ni-update"></em>
+                                        </div>
+                                        <div class="nk-iv-scheme-info">
+                                            <div class="nk-iv-scheme-name">
+                                                {{ $inactiveInvestment->product->name }} - Daily
+                                                {{ ($inactiveInvestment->daily_profit_amount/$userProduct->invested_amount) * 100 }}% for
+                                                {{ $inactiveInvestment->product->tenor }}
+                                            </div>
+                                            <div class="nk-iv-scheme-desc">
+                                                Invested Amount - <span
+                                                    class="amount">${{ $inactiveInvestment->invested_amount }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="nk-iv-scheme-term">
+                                            <div class="nk-iv-scheme-start nk-iv-scheme-order">
+                                                <span class="nk-iv-scheme-label text-soft">Start Date</span><span
+                                                    class="nk-iv-scheme-value date">{{ \Carbon\Carbon::parse($inactiveInvestment->start_at)->format('M d, Y') }}</span>
+                                            </div>
+                                            <div class="nk-iv-scheme-end nk-iv-scheme-order">
+                                                <span class="nk-iv-scheme-label text-soft">End Date</span><span
+                                                    class="nk-iv-scheme-value date">{{ \Carbon\Carbon::parse($inactiveInvestment->end_at)->format('M d, Y') }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="nk-iv-scheme-amount">
+                                            <div class="nk-iv-scheme-amount-a nk-iv-scheme-order">
+                                                @php
+                                                    // Get capital
+                                                    $capital = $inactiveInvestment->current_balance;
+
+                                                    // Get profit
+                                                    // Calculate total profit earned so far
+                                                    $createdAt = \Carbon\Carbon::parse($userProduct->created_at);
+                                                    $now = \Carbon\Carbon::now();
+                                                    // Calculate the difference in days
+                                                    $numberOfDays = $createdAt->diffInDays($now);
+
+                                                    // Total profit
+                                                    $profit = $numberOfDays * $userProduct->daily_profit_amount;
+
+                                                @endphp
+                                                <span class="nk-iv-scheme-label text-soft">Total Return</span><span
+                                                    class="nk-iv-scheme-value amount">$ {{ $capital + $profit }}</span>
+                                            </div>
+                                            <div class="nk-iv-scheme-amount-b nk-iv-scheme-order">
+                                                <span class="nk-iv-scheme-label text-soft">Net Profit Earn</span><span
+                                                    class="nk-iv-scheme-value amount">$ {{ $profit }}
+                                                    <span class="amount-ex">~ ${{ $profit + 90 }}</span></span>
+                                            </div>
+                                        </div>
+                                        <div class="nk-iv-scheme-more">
+                                            <a class="btn btn-icon btn-lg btn-round btn-trans"
+                                                href="{{ route('dashboard.userInvestmentInfo', $inactiveInvestment?->id) }}"><em
+                                                    class="icon ni ni-forward-ios"></em></a>
+                                        </div>
+                                        <div class="nk-iv-scheme-progress">
+                                            <div class="progress-bar" data-progress="25"></div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="alert alert-info">
+                                    <p>No Inactive Investments</p>
                                 </div>
-                                <div class="nk-iv-scheme-info">
-                                    <div class="nk-iv-scheme-name">
-                                        Silver - Daily 4.76% for 21 Days
-                                    </div>
-                                    <div class="nk-iv-scheme-desc">
-                                        Invested Amount - <span class="amount">$250</span>
-                                    </div>
-                                </div>
-                                <div class="nk-iv-scheme-term">
-                                    <div class="nk-iv-scheme-start nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">Start Date</span><span
-                                            class="nk-iv-scheme-value date">Nov 04, 2019</span>
-                                    </div>
-                                    <div class="nk-iv-scheme-end nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">End Date</span><span
-                                            class="nk-iv-scheme-value date">Nov 25, 2019</span>
-                                    </div>
-                                </div>
-                                <div class="nk-iv-scheme-amount">
-                                    <div class="nk-iv-scheme-amount-a nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">Total Return</span><span
-                                            class="nk-iv-scheme-value amount">$ 499.99</span>
-                                    </div>
-                                    <div class="nk-iv-scheme-amount-b nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">Net Profit Earn</span><span
-                                            class="nk-iv-scheme-value amount">$ 97.95
-                                            <span class="amount-ex">~ $152.04</span></span>
-                                    </div>
-                                </div>
-                                <div class="nk-iv-scheme-more">
-                                    <a class="btn btn-icon btn-lg btn-round btn-trans" href="scheme-details.html"><em
-                                            class="icon ni ni-forward-ios"></em></a>
-                                </div>
-                            </div>
-                            <div class="nk-iv-scheme-item">
-                                <div class="nk-iv-scheme-icon is-done">
-                                    <em class="icon ni ni-offer"></em>
-                                </div>
-                                <div class="nk-iv-scheme-info">
-                                    <div class="nk-iv-scheme-name">
-                                        Silver - Daily 4.76% for 21 Days
-                                    </div>
-                                    <div class="nk-iv-scheme-desc">
-                                        Invested Amount - <span class="amount">$1,250</span>
-                                    </div>
-                                </div>
-                                <div class="nk-iv-scheme-term">
-                                    <div class="nk-iv-scheme-start nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">Start Date</span><span
-                                            class="nk-iv-scheme-value date">Oct 30, 2019</span>
-                                    </div>
-                                    <div class="nk-iv-scheme-end nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">End Date</span><span
-                                            class="nk-iv-scheme-value date">Nov 19, 2019</span>
-                                    </div>
-                                </div>
-                                <div class="nk-iv-scheme-amount">
-                                    <div class="nk-iv-scheme-amount-a nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">Total Return</span><span
-                                            class="nk-iv-scheme-value amount">$ 2,500</span>
-                                    </div>
-                                    <div class="nk-iv-scheme-amount-b nk-iv-scheme-order">
-                                        <span class="nk-iv-scheme-label text-soft">Net Profit Earn</span><span
-                                            class="nk-iv-scheme-value amount">$ 1145.25
-                                            <span class="amount-ex">~ $105.75</span></span>
-                                    </div>
-                                </div>
-                                <div class="nk-iv-scheme-more">
-                                    <a class="btn btn-icon btn-lg btn-round btn-trans" href="scheme-details.html"><em
-                                            class="icon ni ni-forward-ios"></em></a>
-                                </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>

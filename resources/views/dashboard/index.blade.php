@@ -7,6 +7,11 @@
         <div class="container-xl wide-lg">
             <div class="nk-content-inner">
                 <div class="nk-content-body">
+                    @if ($user->wallet->active_account === 'demo')
+                        <div class="alert alert-info">
+                            You're currently using your demo account, click the user icon on the navigation to switch
+                        </div>
+                    @endif
                     <div class="nk-block-head">
                         <div class="nk-block-between-md g-3">
                             <div class="nk-block-head-content">
@@ -53,23 +58,23 @@
                                                 </div>
                                             @endforeach
                                         @else
-                                        <div class="slider-item">
-                                            <div class="nk-iv-wg1">
-                                                <div class="nk-iv-wg1-sub sub-text">
-                                                    My Active Plans
-                                                </div>
-                                                <h6 class="nk-iv-wg1-info title">
-                                                    Nothing Here!,
-                                                </h6>
-                                                <a href="#" class="nk-iv-wg1-link link link-light"><em
-                                                        class="icon ni ni-trend-up"></em>
-                                                    <span>you have no running investments</span></a>
-                                                <div class="nk-iv-wg1-progress">
-                                                    <div class="progress-bar bg-primary" data-progress="0">
+                                            <div class="slider-item">
+                                                <div class="nk-iv-wg1">
+                                                    <div class="nk-iv-wg1-sub sub-text">
+                                                        My Active Plans
+                                                    </div>
+                                                    <h6 class="nk-iv-wg1-info title">
+                                                        Nothing Here!,
+                                                    </h6>
+                                                    <a href="#" class="nk-iv-wg1-link link link-light"><em
+                                                            class="icon ni ni-trend-up"></em>
+                                                        <span>you have no running investments</span></a>
+                                                    <div class="nk-iv-wg1-progress">
+                                                        <div class="progress-bar bg-primary" data-progress="0">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         @endif
                                     </div>
                                     <div class="slider-dots"></div>
@@ -77,7 +82,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="nk-block">
+                    {{-- <div class="nk-block">
                         <div class="nk-news card card-bordered">
                             <div class="card-inner">
                                 <div class="nk-news-list">
@@ -98,7 +103,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="nk-block">
                         <div class="row gy-gs">
                             <div class="col-md-6 col-lg-4">
@@ -112,10 +117,20 @@
                                                 </h6>
                                             </div>
                                             <div class="nk-iv-wg2-text">
-                                                <div class="nk-iv-wg2-amount">
-                                                    ${{ $user?->wallet?->current_balance ?? 0 }}
-                                                    <span class="change up"><span class="sign"></span>{{ (($user?->wallet?->balance_before - $user?->wallet?->balance_after) / ($user?->wallet?->balance_after > 0 ? $user?->wallet?->balance_after : 1)) * 100 }}%</span>
-                                                </div>
+                                                {{-- Live balance --}}
+                                                @if ($user->wallet->active_account === 'live')
+                                                    <div class="nk-iv-wg2-amount">
+                                                        ${{ number_format($user?->wallet?->balance_after, 2) ?? 0 }}
+                                                        <span class="change up"><span
+                                                                class="sign"></span>{{ (($user?->wallet?->balance_after - $user?->wallet?->balance_before) / ($user?->wallet?->balance_after > 0 ? $user?->wallet?->balance_after : 1)) * 100 }}%</span>
+                                                    </div>
+                                                @else
+                                                    <div class="nk-iv-wg2-amount">
+                                                        ${{ number_format($user?->wallet?->demo_balance_after, 2) ?? 0 }}
+                                                        <span class="change up"><span
+                                                                class="sign"></span>{{ (($user?->wallet?->demo_balance_after - $user?->wallet?->demo_balance_before) / ($user?->wallet?->demo_balance_after > 0 ? $user?->wallet?->demo_balance_after : 1)) * 100 }}%</span>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -132,7 +147,7 @@
                                             </div>
                                             <div class="nk-iv-wg2-text">
                                                 <div class="nk-iv-wg2-amount">
-                                                    ${{ $user?->investments?->sum('current_balance') ?? 0 }}
+                                                    ${{ number_format($user?->investments?->where('active_account', $user->wallet->active_account)->sum('current_balance'), 2) ?? 0 }}
                                                     <span class="change up"><span class="sign"></span>2.8%</span>
                                                 </div>
                                             </div>
@@ -172,7 +187,7 @@
                                             </div>
                                             <div class="nk-iv-wg2-text">
                                                 <div class="nk-iv-wg2-amount ui-v2">
-                                                    ${{ $user?->wallet?->balance_after + $user?->investments->where('status', 'running')->sum('invested_amount') ?? 0}}
+                                                    ${{ $user?->wallet?->balance_after + $user?->investments->where('status', 'running')->sum('invested_amount') ?? 0 }}
                                                 </div>
                                                 <ul class="nk-iv-wg2-list">
                                                     <li>
@@ -185,7 +200,7 @@
                                                     </li>
                                                     <li class="total">
                                                         <span class="item-label">Total</span><span
-                                                            class="item-value">${{ $user?->wallet?->balance_after + $user?->investments->where('status', 'running')->sum('invested_amount') ?? 0}}</span>
+                                                            class="item-value">${{ $user?->wallet?->balance_after + $user?->investments->where('status', 'running')->sum('invested_amount') ?? 0 }}</span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -253,16 +268,18 @@
                                             </div>
                                             <div class="nk-iv-wg2-text">
                                                 <div class="nk-iv-wg2-amount ui-v2">
-                                                    {{ $investments->count() }} <span class="sub">{{ $investments->where('status', 'running')->count() }}</span> Active
+                                                    {{ $investments->count() }} <span
+                                                        class="sub">{{ $investments->where('status', 'running')->count() }}</span>
+                                                    Active
                                                 </div>
                                                 <ul class="nk-iv-wg2-list">
                                                     @if ($investments->count() > 0)
                                                         @foreach ($investments as $investment)
-                                                        <li>
-                                                            <span class="item-label"><a href="#">Silver</a>
-                                                                <small>- 4.76% for 21 Days</small></span><span
-                                                                class="item-value">2,500.00</span>
-                                                        </li>
+                                                            <li>
+                                                                <span class="item-label"><a href="#">Silver</a>
+                                                                    <small>- 4.76% for 21 Days</small></span><span
+                                                                    class="item-value">2,500.00</span>
+                                                            </li>
                                                         @endforeach
                                                     @else
                                                         <li>

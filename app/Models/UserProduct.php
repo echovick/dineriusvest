@@ -27,6 +27,7 @@ class UserProduct extends Model
         'previous_balance',
         'current_balance',
         'status',
+        'active_account'
     ];
 
     protected $casts = [
