@@ -17,7 +17,7 @@
                                 <div class="nk-block-head-content">
                                     <h2 class="nk-block-title fw-normal">
                                         {{ $userProduct->product->name }} - Daily
-                                        {{ ($userProduct->daily_profit_amount/$userProduct->invested_amount) * 100 }}% for
+                                        {{ ($userProduct->daily_profit_amount / $userProduct->invested_amount) * 100 }}% for
                                         {{ $userProduct->product->tenor }}
                                     </h2>
                                     <div class="nk-block-des">
@@ -54,7 +54,8 @@
                                             <div class="nk-iv-wg3-group flex-lg-nowrap gx-4">
                                                 <div class="nk-iv-wg3-sub">
                                                     <div class="nk-iv-wg3-amount">
-                                                        <div class="number">${{ number_format($userProduct->invested_amount, 2) }}</div>
+                                                        <div class="number">
+                                                            ${{ number_format($userProduct->invested_amount, 2) }}</div>
                                                     </div>
                                                     <div class="nk-iv-wg3-subtitle">
                                                         Invested Amount
@@ -69,7 +70,7 @@
                                                         $currentInvestmentValue = $userProduct->current_balance;
 
                                                         // Calculate total profit earned so far
-                                                        $createdAt  = \Carbon\Carbon::parse($userProduct->created_at);
+                                                        $createdAt = \Carbon\Carbon::parse($userProduct->created_at);
                                                         $now = \Carbon\Carbon::now();
                                                         // Calculate the difference in days
                                                         $numberOfDays = $createdAt->diffInDays($now);
@@ -83,26 +84,26 @@
                                                         // Get current profit amount
                                                         $currentProfitAmount = $userProduct->current_profit_amount;
 
-                                                        if($previousProfitAmount > 0){
-                                                            $profitChange = (($currentProfitAmount - $previousProfitAmount)/$previousProfitAmount) * 100;
-                                                        }else{
+                                                        if ($previousProfitAmount > 0) {
+                                                            $profitChange = (($currentProfitAmount - $previousProfitAmount) / $previousProfitAmount) * 100;
+                                                        } else {
                                                             $profitChange = 0;
                                                         }
 
                                                         // Calculate change in total returns
-                                                        $totalReturnChange = ($totalProfitEarnedSofar/($capital + $totalProfitEarnedSofar)) * 100;
-                                                        if($totalReturnChange >= 0){
+                                                        $totalReturnChange = ($totalProfitEarnedSofar / ($capital + $totalProfitEarnedSofar)) * 100;
+                                                        if ($totalReturnChange >= 0) {
                                                             $signClass = 'number-up';
-                                                        }else{
+                                                        } else {
                                                             $signClass = 'number-down';
                                                         }
 
                                                         // Get total expected profit
-                                                        $expectedProfit = ($userProduct->product->interest_rate/100) * $userProduct->invested_amount;
-                                                        $profitChangePercentage = $totalProfitEarnedSofar/$expectedProfit * 100;
-                                                        if($profitChangePercentage >= 0){
+                                                        $expectedProfit = ($userProduct->product->interest_rate / 100) * $userProduct->invested_amount;
+                                                        $profitChangePercentage = ($totalProfitEarnedSofar / $expectedProfit) * 100;
+                                                        if ($profitChangePercentage >= 0) {
                                                             $profitChangePercentageSignClass = 'number-up';
-                                                        }else{
+                                                        } else {
                                                             $profitChangePercentageSignClass = 'number-down';
                                                         }
                                                     @endphp
@@ -111,7 +112,9 @@
                                                     <div class="nk-iv-wg3-amount">
                                                         <div class="number">
                                                             ${{ number_format($totalProfitEarnedSofar, 2) }}
-                                                            <span class="{{ $profitChangePercentageSignClass }}">{{ number_format($profitChangePercentage, 2) }} %</span>
+                                                            <span
+                                                                class="{{ $profitChangePercentageSignClass }}">{{ number_format($profitChangePercentage, 2) }}
+                                                                %</span>
                                                         </div>
                                                     </div>
                                                     <div class="nk-iv-wg3-subtitle">
@@ -128,7 +131,8 @@
                                                     <div class="nk-iv-wg3-amount">
                                                         <div class="number">
                                                             ${{ number_format($capital + $totalProfitEarnedSofar, 2) }}
-                                                            <span class="{{ $signClass }}">{{ number_format($totalReturnChange,2) }}%
+                                                            <span
+                                                                class="{{ $signClass }}">{{ number_format($totalReturnChange, 2) }}%
                                                                 <em class="icon ni ni-info-fill" data-bs-toggle="tooltip"
                                                                     data-bs-placement="right"
                                                                     title="This is the percentage growth of your investment"></em></span>
@@ -151,25 +155,35 @@
                                     </li>
                                     <li>
                                         <div class="sub-text">Term start at</div>
-                                        <div class="lead-text">{{ \Carbon\Carbon::parse($userProduct->start_at)->format('M d, Y h:i A') }}</div>
+                                        <div class="lead-text">
+                                            {{ \Carbon\Carbon::parse($userProduct->start_at)->format('M d, Y h:i A') }}
+                                        </div>
                                     </li>
                                     <li>
                                         <div class="sub-text">Term end at</div>
-                                        <div class="lead-text">{{ \Carbon\Carbon::parse($userProduct->start_at)->format('M d, Y h:i A') }}</div>
+                                        <div class="lead-text">
+                                            {{ \Carbon\Carbon::parse($userProduct->start_at)->format('M d, Y h:i A') }}
+                                        </div>
                                     </li>
                                     <li>
                                         <div class="sub-text">Daily interest</div>
-                                        <div class="lead-text">${{ ($userProduct->daily_profit_amount/$userProduct->invested_amount) * 100 }}</div>
+                                        <div class="lead-text">
+                                            ${{ ($userProduct->daily_profit_amount / $userProduct->invested_amount) * 100 }}
+                                        </div>
                                     </li>
                                 </ul>
                                 <ul class="nk-iv-wg3-list">
                                     <li>
                                         <div class="sub-text">Ordered date</div>
-                                        <div class="lead-text">{{ \Carbon\Carbon::parse($userProduct->order_date)->format('M d, Y h:i A') }}</div>
+                                        <div class="lead-text">
+                                            {{ \Carbon\Carbon::parse($userProduct->order_date)->format('M d, Y h:i A') }}
+                                        </div>
                                     </li>
                                     <li>
                                         <div class="sub-text">Approved date</div>
-                                        <div class="lead-text">{{ \Carbon\Carbon::parse($userProduct->approved_date)->format('M d, Y h:i A') }}</div>
+                                        <div class="lead-text">
+                                            {{ \Carbon\Carbon::parse($userProduct->approved_date)->format('M d, Y h:i A') }}
+                                        </div>
                                     </li>
                                     <li>
                                         <div class="sub-text">Payment method</div>
@@ -182,7 +196,7 @@
                                         <div class="lead-text">
                                             @php
                                                 // Calculate commission fee
-                                                $commissionFee
+                                                $commissionFee;
                                             @endphp
                                             <span class="currency currency-usd">USD</span>
                                             {{ number_format($userProduct->invested_amount, 2) }}
@@ -235,15 +249,21 @@
                                                 <h5 class="nk-iv-wg5-title">Overview</h5>
                                             </div>
                                             <div class="nk-iv-wg5-ck">
-                                                <input type="text" class="knob-half" value="68.9"
+                                                <input type="text" class="knob-half"
+                                                    value="{{ number_format($profitChangePercentage, 2) }}"
                                                     data-fgColor="#6576ff" data-bgColor="#d9e5f7" data-thickness=".06"
                                                     data-width="300" data-height="155" data-displayInput="false" />
                                                 <div class="nk-iv-wg5-ck-result">
-                                                    <div class="text-lead">68.9%</div>
-                                                    <div class="text-sub">112.54 / per day</div>
+                                                    <div class="text-lead">
+                                                        ${{ number_format($userProduct->invested_amount + $totalProfitEarnedSofar, 2) }}
+                                                    </div>
+                                                    <div class="text-sub">
+                                                        ${{ number_format($userProduct->daily_profit_amount, 2) }} / per
+                                                        day
+                                                    </div>
                                                 </div>
                                                 <div class="nk-iv-wg5-ck-minmax">
-                                                    <span>2,500.00</span><span>4,999.90</span>
+                                                    <span>${{ number_format($userProduct->invested_amount, 2) }}</span><span>${{ number_format($userProduct->invested_amount + $expectedProfit, 2) }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -257,20 +277,24 @@
                                             <div class="nk-iv-wg5-head">
                                                 <h5 class="nk-iv-wg5-title">Net Profit</h5>
                                                 <div class="nk-iv-wg5-subtitle">
-                                                    Earn so far <strong>1,643.76</strong>
+                                                    Earn so far
+                                                    <strong>{{ number_format($totalProfitEarnedSofar, 2) }}</strong>
                                                     <span class="currency currency-usd">USD</span>
                                                 </div>
                                             </div>
                                             <div class="nk-iv-wg5-ck sm">
-                                                <input type="text" class="knob-half" value="68.9"
+                                                <input type="text" class="knob-half"
+                                                    value="{{ number_format($profitChangePercentage, 2) }}"
                                                     data-fgColor="#33d895" data-bgColor="#d9e5f7" data-thickness=".07"
                                                     data-width="240" data-height="125" data-displayInput="false" />
                                                 <div class="nk-iv-wg5-ck-result">
-                                                    <div class="text-lead sm">4.76%</div>
+                                                    <div class="text-lead sm">
+                                                        {{ ($userProduct->daily_profit_amount / $userProduct->invested_amount) * 100 }}%
+                                                    </div>
                                                     <div class="text-sub">Daily profit</div>
                                                 </div>
                                                 <div class="nk-iv-wg5-ck-minmax">
-                                                    <span>0.00</span><span>2,999.90</span>
+                                                    <span>$0.00</span><span>${{ number_format($expectedProfit, 2) }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -284,20 +308,36 @@
                                             <div class="nk-iv-wg5-head">
                                                 <h5 class="nk-iv-wg5-title">Day Remain</h5>
                                                 <div class="nk-iv-wg5-subtitle">
-                                                    Earn so far <strong>1,643.76</strong>
+                                                    Earn so far
+                                                    <strong>{{ number_format($userProduct->invested_amount + $totalProfitEarnedSofar, 2) }}</strong>
                                                     <span class="currency currency-usd">USD</span>
                                                 </div>
                                             </div>
                                             <div class="nk-iv-wg5-ck sm">
-                                                <input type="text" class="knob-half" value="68.9"
+                                                @php
+                                                    // Get days data
+                                                    $startDate = \Carbon\Carbon::parse($userProduct->start_at);
+                                                    $endDate = \Carbon\Carbon::parse($userProduct->end_at);
+
+                                                    // Calculate the difference in days
+                                                    $numberOfDays = $startDate->diffInDays($endDate);
+
+                                                    // Get the current date and time
+                                                    $now = \Carbon\Carbon::now();
+
+                                                    // Calculate the remaining days
+                                                    $remainingDays = $now->diffInDays($endDate);
+                                                @endphp
+                                                <input type="text" class="knob-half"
+                                                    value="{{ 100 - ($remainingDays / $numberOfDays) * 100 }}"
                                                     data-fgColor="#816bff" data-bgColor="#d9e5f7" data-thickness=".07"
                                                     data-width="240" data-height="125" data-displayInput="false" />
                                                 <div class="nk-iv-wg5-ck-result">
-                                                    <div class="text-lead sm">8 D</div>
+                                                    <div class="text-lead sm">{{ $remainingDays }} Days</div>
                                                     <div class="text-sub">day remain</div>
                                                 </div>
                                                 <div class="nk-iv-wg5-ck-minmax">
-                                                    <span>0</span><span>21</span>
+                                                    <span>0</span><span>{{ $numberOfDays }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -326,39 +366,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="tb-col-type">
-                                            <span class="sub-text">Investment</span>
-                                        </td>
-                                        <td class="tb-col-date">
-                                            <span class="sub-text">04 Nov, 2018</span>
-                                        </td>
-                                        <td class="tb-col-time tb-col-end">
-                                            <span class="lead-text text-danger">- 2,500.00</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tb-col-type">
-                                            <span class="sub-text">Profit - 4.76%</span>
-                                        </td>
-                                        <td class="tb-col-date">
-                                            <span class="sub-text">05 Nov, 2018</span>
-                                        </td>
-                                        <td class="tb-col-time tb-col-end">
-                                            <span class="lead-text">+ 119.10</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tb-col-type">
-                                            <span class="sub-text">Profit - 4.76%</span>
-                                        </td>
-                                        <td class="tb-col-date">
-                                            <span class="sub-text">06 Nov, 2018</span>
-                                        </td>
-                                        <td class="tb-col-time tb-col-end">
-                                            <span class="lead-text">+ 119.10</span>
-                                        </td>
-                                    </tr>
+                                    @if ($userProduct->productTransactions)
+                                        @foreach ($userProduct->productTransactions as $productTransaction)
+                                            <tr>
+                                                <td class="tb-col-type">
+                                                    <span class="sub-text">{{ ucwords($productTransaction->type) }}</span>
+                                                </td>
+                                                <td class="tb-col-date">
+                                                    <span class="sub-text">{{ $productTransaction->created_at }}</span>
+                                                </td>
+                                                <td class="tb-col-time tb-col-end">
+                                                    <span class="lead-text text-{{ $productTransaction->charge_type == 'debit' ? 'danger' : 'primary' }}">
+                                                        {{ $productTransaction->charge_type == 'debit' ? '-' : '+' }}
+                                                        {{ $productTransaction->amount }}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

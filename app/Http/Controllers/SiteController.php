@@ -52,4 +52,10 @@ class SiteController extends Controller
     {
         return view('site.reset-password');
     }
+
+    public function educationChapterInfo($chapter)
+    {
+        // Get the education chapter
+        return view('site.education-chapter', compact('chapter'));
+    }
 }

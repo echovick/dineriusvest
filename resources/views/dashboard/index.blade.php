@@ -45,9 +45,13 @@
                                                             My Active Plans
                                                         </div>
                                                         <h6 class="nk-iv-wg1-info title">
-                                                            Silver - 4.76% for 21 Days
+                                                            {{ $investment->product->name }} -
+                                                            {{ ($investment->daily_profit_amount / $investment->invested_amount) * 100 }}%
+                                                            for
+                                                            {{ $investment->product->tenor }}
                                                         </h6>
-                                                        <a href="#" class="nk-iv-wg1-link link link-light"><em
+                                                        <a href="{{ route('dashboard.userInvestmentInfo', $investment->id) }}"
+                                                            class="nk-iv-wg1-link link link-light"><em
                                                                 class="icon ni ni-trend-up"></em>
                                                             <span>Check Details</span></a>
                                                         <div class="nk-iv-wg1-progress">
@@ -122,13 +126,18 @@
                                                     <div class="nk-iv-wg2-amount">
                                                         ${{ number_format($user?->wallet?->balance_after, 2) ?? 0 }}
                                                         <span class="change up"><span
-                                                                class="sign"></span>{{ (($user?->wallet?->balance_after - $user?->wallet?->balance_before) / ($user?->wallet?->balance_after > 0 ? $user?->wallet?->balance_after : 1)) * 100 }}%</span>
+                                                                class="sign"></span>{{ number_format((($user?->wallet?->balance_after - $user?->wallet?->balance_before) / ($user?->wallet?->balance_after > 0 ? $user?->wallet?->balance_after : 1)) * 100, 2) }}%</span>
                                                     </div>
                                                 @else
                                                     <div class="nk-iv-wg2-amount">
+                                                        {{-- Calculate Change in balance --}}
+                                                        @php
+                                                            $balanceChangePercentage = (($user?->wallet?->demo_balance_after - $user?->wallet?->demo_balance_before) / ($user?->wallet?->demo_balance_after > 0 ? $user?->wallet?->demo_balance_after : 1)) * 100;
+                                                        @endphp
                                                         ${{ number_format($user?->wallet?->demo_balance_after, 2) ?? 0 }}
-                                                        <span class="change up"><span
-                                                                class="sign"></span>{{ (($user?->wallet?->demo_balance_after - $user?->wallet?->demo_balance_before) / ($user?->wallet?->demo_balance_after > 0 ? $user?->wallet?->demo_balance_after : 1)) * 100 }}%</span>
+                                                        <span
+                                                            class="change {{ $balanceChangePercentage >= 0 ? 'up' : 'down' }}"><span
+                                                                class="sign"></span>{{ number_format($balanceChangePercentage, 2) }}%</span>
                                                     </div>
                                                 @endif
                                             </div>
@@ -146,9 +155,18 @@
                                                 </h6>
                                             </div>
                                             <div class="nk-iv-wg2-text">
+                                                @php
+                                                    // Calculate change in total invested, by getting the percentage change from all before and after balance of investments
+                                                    $currentInvestmentBalance = $user?->investments?->where('active_account', $user->wallet->active_account)->sum('current_balance');
+                                                    $previousInvestmentBalance = $user?->investments?->where('active_account', $user->wallet->active_account)->sum('previous_balance');
+
+                                                    $changeInBalancePercentage = (($currentInvestmentBalance - $previousInvestmentBalance) / $currentInvestmentBalance) * 100;
+                                                @endphp
                                                 <div class="nk-iv-wg2-amount">
-                                                    ${{ number_format($user?->investments?->where('active_account', $user->wallet->active_account)->sum('current_balance'), 2) ?? 0 }}
-                                                    <span class="change up"><span class="sign"></span>2.8%</span>
+                                                    ${{ number_format($user?->investments?->where('active_account', $user->wallet->active_account)->sum('invested_amount'), 2) ?? 0 }}
+                                                    <span
+                                                        class="change {{ $changeInBalancePercentage >= 0 ? 'up' : 'down' }}"><span
+                                                            class="sign"></span>{{ number_format($changeInBalancePercentage, 2) }}%</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -186,23 +204,43 @@
                                                 <h6 class="title">Balance in Account</h6>
                                             </div>
                                             <div class="nk-iv-wg2-text">
-                                                <div class="nk-iv-wg2-amount ui-v2">
-                                                    ${{ $user?->wallet?->balance_after + $user?->investments->where('status', 'running')->sum('invested_amount') ?? 0 }}
-                                                </div>
-                                                <ul class="nk-iv-wg2-list">
-                                                    <li>
-                                                        <span class="item-label">Available Funds</span><span
-                                                            class="item-value">${{ $user?->wallet?->balance_after ?? 0 }}</span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="item-label">Invested Funds</span><span
-                                                            class="item-value">${{ $user?->investments->where('status', 'running')->sum('invested_amount') ?? 0 }}</span>
-                                                    </li>
-                                                    <li class="total">
-                                                        <span class="item-label">Total</span><span
-                                                            class="item-value">${{ $user?->wallet?->balance_after + $user?->investments->where('status', 'running')->sum('invested_amount') ?? 0 }}</span>
-                                                    </li>
-                                                </ul>
+                                                @if ($user->wallet->active_account == 'live')
+                                                    <div class="nk-iv-wg2-amount ui-v2">
+                                                        ${{ number_format($user?->wallet?->balance_after + $user?->investments->where('status', 'active')->sum('invested_amount') ?? 0, 2) }}
+                                                    </div>
+                                                    <ul class="nk-iv-wg2-list">
+                                                        <li>
+                                                            <span class="item-label">Available Funds</span><span
+                                                                class="item-value">${{ number_format($user?->wallet?->balance_after ?? 0, 2) }}</span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="item-label">Invested Funds</span><span
+                                                                class="item-value">${{ number_format($user?->investments->where('status', 'active')->sum('invested_amount') ?? 0, 2) }}</span>
+                                                        </li>
+                                                        <li class="total">
+                                                            <span class="item-label">Total</span><span
+                                                                class="item-value">${{ number_format($user?->wallet?->balance_after + $user?->investments->where('status', 'active')->where('active_account', 'live')->sum('invested_amount') ?? 0, 2) }}</span>
+                                                        </li>
+                                                    </ul>
+                                                @else
+                                                    <div class="nk-iv-wg2-amount ui-v2">
+                                                        ${{ number_format($user?->wallet?->demo_balance_after + $user?->investments->where('status', 'active')->where('active_account', 'demo')->sum('invested_amount') ?? 0, 2) }}
+                                                    </div>
+                                                    <ul class="nk-iv-wg2-list">
+                                                        <li>
+                                                            <span class="item-label">Available Funds</span><span
+                                                                class="item-value">${{ number_format($user?->wallet?->demo_balance_after ?? 0, 2) }}</span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="item-label">Invested Funds</span><span
+                                                                class="item-value">${{ number_format($user?->investments->where('status', 'active')->where('active_account','demo')->sum('invested_amount') ?? 0, 2) }}</span>
+                                                        </li>
+                                                        <li class="total">
+                                                            <span class="item-label">Total</span><span
+                                                                class="item-value">${{ number_format($user?->wallet?->demo_balance_after + $user?->investments->where('status', 'active')->where('active_account', 'demo')->sum('invested_amount') ?? 0, 2) }}</span>
+                                                        </li>
+                                                    </ul>
+                                                @endif
                                             </div>
                                             <div class="nk-iv-wg2-cta">
                                                 <a href="#" class="btn btn-primary btn-lg btn-block">Withdraw
@@ -248,7 +286,7 @@
                                                 </ul>
                                             </div>
                                             <div class="nk-iv-wg2-cta">
-                                                <a href="#" class="btn btn-primary btn-lg btn-block">Invest &
+                                                <a href="{{ route('dashboard.investment.products') }}" class="btn btn-primary btn-lg btn-block">Invest &
                                                     Earn</a>
                                                 <div class="cta-extra">
                                                     Earn up to 25$
@@ -269,16 +307,16 @@
                                             <div class="nk-iv-wg2-text">
                                                 <div class="nk-iv-wg2-amount ui-v2">
                                                     {{ $investments->count() }} <span
-                                                        class="sub">{{ $investments->where('status', 'running')->count() }}</span>
+                                                        class="sub">{{ $investments->count() }}</span>
                                                     Active
                                                 </div>
                                                 <ul class="nk-iv-wg2-list">
                                                     @if ($investments->count() > 0)
                                                         @foreach ($investments as $investment)
                                                             <li>
-                                                                <span class="item-label"><a href="#">Silver</a>
-                                                                    <small>- 4.76% for 21 Days</small></span><span
-                                                                    class="item-value">2,500.00</span>
+                                                                <span class="item-label"><a href="#">{{ $investment->product->name }}</a>
+                                                                    <small>- for {{ $investment->product->tenor }}</small></span><span
+                                                                    class="item-value">${{ number_format($investment->invested_amount, 2) }}</span>
                                                             </li>
                                                         @endforeach
                                                     @else
@@ -290,7 +328,7 @@
                                                 </ul>
                                             </div>
                                             <div class="nk-iv-wg2-cta">
-                                                <a href="#" class="btn btn-light btn-lg btn-block">See
+                                                <a href="{{ url('account/investments') }}" class="btn btn-light btn-lg btn-block">See
                                                     all Investment</a>
                                                 <div class="cta-extra">
                                                     Check out

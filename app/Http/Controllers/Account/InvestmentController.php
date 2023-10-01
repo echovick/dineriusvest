@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\UserProduct;
+use App\Models\UserProductTransaction;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
@@ -85,6 +86,10 @@ class InvestmentController extends Controller
 
     public function newInvestmentForm($id)
     {
+        if(isset($_GET['plan-iv'])){
+            $id = $_GET['plan-iv'];
+        }
+
         // Get user
         $user = Auth::user();
 
@@ -146,7 +151,12 @@ class InvestmentController extends Controller
             'active_account' => $user->wallet->active_account,
         ];
 
+        // Create user investment
         $userProduct = UserProduct::create($data);
+
+        // Creaye transaction data for investment
+        $userProductTransactionQuery = $this->prepareTransactionQueryData($request, $userProduct);
+        UserProductTransaction::create($userProductTransactionQuery);
 
         // Debit User balance
         if ($userProduct) {
@@ -172,6 +182,8 @@ class InvestmentController extends Controller
             // Get investment details
             $userProduct = UserProduct::findOrFail($id);
 
+            $userProduct->sync();
+
             // Get product categories
             $productCategory = ProductCategory::all();
 
@@ -181,7 +193,24 @@ class InvestmentController extends Controller
         }
     }
 
-    // Get all private functions
+    public function prepareTransactionQueryData($request, $userProduct){
+        return [
+            'user_id' => Auth::id(),
+            'user_product_id' => $userProduct->id,
+            'type' => 'investment',
+            'narration' => 'Initial Investment deposit',
+            'amount' => $request->input('amount'),
+            'balance_before_charge' => $userProduct->previous_balance,
+            'balance_after_charge' => $userProduct->current_balance,
+            'charge_type' => 'credit',
+            'active_account' => $userProduct->active_account,
+            'created_at' => Carbon::now()
+        ];
+    }
+
+    /**
+     *  All private functions
+     */
     private function convertMonthsToDays($months)
     {
         $interval = CarbonInterval::months($months);

@@ -103,14 +103,16 @@
                                             class="nk-menu-text">My Investments</span></a>
                                 </li>
                                 <li class="nk-menu-item active has-sub">
-                                    <a href="{{ route('dashboard.investment.products') }}" class="nk-menu-link nk-menu-toggle"><span
-                                            class="nk-menu-text">Investment Options</span></a>
+                                    <a href="{{ route('dashboard.investment.products') }}"
+                                        class="nk-menu-link nk-menu-toggle"><span class="nk-menu-text">Investment
+                                            Options</span></a>
                                     <ul class="nk-menu-sub">
                                         @foreach ($productCategory as $category)
-                                        <li class="nk-menu-item">
-                                            <a href="{{ route('dashboard.investmentCategoryDetails', $category->id) }}" class="nk-menu-link"><span class="nk-menu-text">
-                                                    {{ $category->name }}</span></a>
-                                        </li>
+                                            <li class="nk-menu-item">
+                                                <a href="{{ route('dashboard.investmentCategoryDetails', $category->id) }}"
+                                                    class="nk-menu-link"><span class="nk-menu-text">
+                                                        {{ $category->name }}</span></a>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </li>
@@ -323,7 +325,8 @@
                                             <div class="user-card">
                                                 <div class="user-avatar"><span>AB</span></div>
                                                 <div class="user-info">
-                                                    <span class="lead-text">{{ $user->profile->first_name }} {{ $user->profile->last_name }}</span><span
+                                                    <span class="lead-text">{{ $user->profile->first_name }}
+                                                        {{ $user->profile->last_name }}</span><span
                                                         class="sub-text">{{ $user->email }}</span>
                                                 </div>
                                                 <div class="user-action">
@@ -337,9 +340,9 @@
                                             <h6 class="overline-title-alt">Account Balance</h6>
                                             <div class="user-balance">
                                                 @if ($user->wallet->active_account === 'live')
-                                                ${{ number_format($user?->wallet?->balance_after, 2) ?? 0 }}
+                                                    ${{ number_format($user?->wallet?->balance_after, 2) ?? 0 }}
                                                 @else
-                                                ${{ number_format($user?->wallet?->demo_balance_after, 2) ?? 0 }}
+                                                    ${{ number_format($user?->wallet?->demo_balance_after, 2) ?? 0 }}
                                                 @endif
                                                 <small class="currency currency-usd">USD</small>
                                             </div>
@@ -352,7 +355,8 @@
                                                 <a href="#" class="link"><span>Withdraw Balance</span>
                                                     <em class="icon ni ni-wallet-out"></em></a>
                                             @else
-                                                <form action="{{ route('dashboard.refreshDemoBalance') }}" method="POST" class="mt-2">
+                                                <form action="{{ route('dashboard.refreshDemoBalance') }}"
+                                                    method="POST" class="mt-2">
                                                     @csrf
                                                     <button class="btn btn-primary btn-sm">Refresh Balance</button>
                                                 </form>

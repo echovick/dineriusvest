@@ -78,7 +78,7 @@
                                                 <ul class="list list-sm list-checked">
                                                     <li>
                                                         Minimum primary deposit:
-                                                        <span>{{ $product->min_deposit }}</span>
+                                                        <span>${{ number_format($product->min_deposit, 2) }}</span>
                                                     </li>
                                                     <li>
                                                         Duration:
@@ -88,8 +88,8 @@
                                                     @if ($product->payment_schedule)
                                                     <li>
                                                         @php $part = explode(":", $product->payment_schedule); @endphp
-                                                        {{ $part[0] }}:
-                                                        <span>{{ $part[1] }}</span>
+                                                        {{ $part[0] ?? '' }}:
+                                                        <span>{{ $part[1] ?? '' }}</span>
                                                     </li>
                                                     @endif
                                                 </ul>

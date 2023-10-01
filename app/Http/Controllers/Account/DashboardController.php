@@ -16,16 +16,21 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $currentMonth = Carbon::now()->startOfMonth();
-        $currentMonthEnd = Carbon::now()->endOfMonth();
-
-        $currentMonthProfitSum = UserProduct::where('status', 'running')
-            ->whereBetween('start_at', [$currentMonth, $currentMonthEnd])
-            ->sum('current_profit_amount');
-
         $user = User::find(Auth::id());
+
+        // Get the current date and time
+        $now = Carbon::now();
+
+        // Get the total number of days in the current month
+        $totalDaysInMonth = $now->daysInMonth;
+
+        // Get the current day of the month
+        $currentDay = $now->day;
+
+        $currentMonthProfitSum = $user->investments->where('active_account', $user->wallet->active_account)->sum('daily_profit_amount') * $currentDay;
+
         $products = Product::all();
-        $investments = UserProduct::all();
+        $investments = $user->investments->where('status', 'active')->where('active_account', $user->wallet->active_account);
 
         // Product Categories
         $productCategory = ProductCategory::all();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
@@ -19,7 +20,9 @@ class ProductController extends Controller
 
         $products = Product::all();
 
-        return view('dashboard.products', compact('user', 'products'));
+        $productCategory = ProductCategory::all();
+
+        return view('dashboard.products', compact('user', 'products', 'productCategory'));
     }
 
     /**

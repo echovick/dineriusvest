@@ -61,7 +61,7 @@
                                     </td>
                                     <td>Investment is a powerful tool that allows individuals to grow their wealth and achieve financial goals</td>
                                     <td class="uk-width-1-5@m uk-text-right@m">
-                                        <a href="#" class="uk-button uk-button-text uk-text-muted">Coming Soon<i
+                                        <a href="{{ route('site.education.chapter', 1) }}" class="uk-button uk-button-text uk-text-muted">Open<i
                                                 class="fas fa-chevron-right fa-xs uk-margin-small-left"></i></a>
                                     </td>
                                 </tr>
@@ -80,7 +80,7 @@
                                     </td>
                                     <td>Clearly defining investment goals lays the foundation for a well-structured and purposeful investment plan.</td>
                                     <td class="uk-width-1-5@m uk-text-right@m">
-                                        <a href="#" class="uk-button uk-button-text uk-text-muted">Coming Soon<i
+                                        <a href="{{ route('site.education.chapter', 2) }}" class="uk-button uk-button-text uk-text-muted">Open<i
                                                 class="fas fa-chevron-right fa-xs uk-margin-small-left"></i></a>
                                     </td>
                                 </tr>
@@ -99,7 +99,7 @@
                                     </td>
                                     <td>Investment vehicles refer to the various options available to investors to park their money</td>
                                     <td class="uk-width-1-5@m uk-text-right@m">
-                                        <a href="#" class="uk-button uk-button-text uk-text-muted">Coming Soon<i
+                                        <a href="{{ route('site.education.chapter', 3) }}" class="uk-button uk-button-text uk-text-muted">Open<i
                                                 class="fas fa-chevron-right fa-xs uk-margin-small-left"></i></a>
                                     </td>
                                 </tr>
@@ -118,7 +118,7 @@
                                     </td>
                                     <td>Asset allocation involves dividing investments across different asset classes, such as stocks, bonds, and cash, to optimize returns while minimizing risk.</td>
                                     <td class="uk-width-1-5@m uk-text-right@m">
-                                        <a href="#" class="uk-button uk-button-text uk-text-muted">Coming Soon<i
+                                        <a href="{{ route('site.education.chapter', 4) }}" class="uk-button uk-button-text uk-text-muted">Open<i
                                                 class="fas fa-chevron-right fa-xs uk-margin-small-left"></i></a>
                                     </td>
                                 </tr>
@@ -137,7 +137,45 @@
                                     </td>
                                     <td>Investment vehicles refer to the various options available to investors to park their money</td>
                                     <td class="uk-width-1-5@m uk-text-right@m">
-                                        <a href="#" class="uk-button uk-button-text uk-text-muted">Coming Soon<i
+                                        <a href="{{ route('site.education.chapter', 5) }}" class="uk-button uk-button-text uk-text-muted">Open<i
+                                                class="fas fa-chevron-right fa-xs uk-margin-small-left"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="uk-width-1-3@m">
+                                        <div class="uk-grid uk-grid-small uk-flex uk-flex-middle">
+                                            <div class="uk-width-auto">
+                                                <div class="in-icon-wrap primary-color">
+                                                    <i class="fas fa-chart-area fa-lg"></i>
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-expand">
+                                                <h5>CHAPTER SIX: A Step-by-Step Guide to Crafting the Right Investment Strategy</h5>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Investment vehicles refer to the various options available to investors to park their money</td>
+                                    <td class="uk-width-1-5@m uk-text-right@m">
+                                        <a href="{{ route('site.education.chapter', 5) }}" class="uk-button uk-button-text uk-text-muted">Open<i
+                                                class="fas fa-chevron-right fa-xs uk-margin-small-left"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="uk-width-1-3@m">
+                                        <div class="uk-grid uk-grid-small uk-flex uk-flex-middle">
+                                            <div class="uk-width-auto">
+                                                <div class="in-icon-wrap primary-color">
+                                                    <i class="fas fa-chart-area fa-lg"></i>
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-expand">
+                                                <h5>GLOSSARY</h5>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Investment vehicles refer to the various options available to investors to park their money</td>
+                                    <td class="uk-width-1-5@m uk-text-right@m">
+                                        <a href="{{ route('site.education.chapter', 'glossary') }}" class="uk-button uk-button-text uk-text-muted">Open<i
                                                 class="fas fa-chevron-right fa-xs uk-margin-small-left"></i></a>
                                     </td>
                                 </tr>

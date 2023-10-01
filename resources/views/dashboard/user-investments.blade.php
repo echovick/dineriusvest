@@ -100,7 +100,8 @@
                                                             <span class="nk-iv-wg3-plus text-soft"><em
                                                                     class="icon ni ni-plus"></em></span>
                                                             <div class="nk-iv-wg3-amount">
-                                                                <div class="number-sm">${{ number_format($todayProfitSum,2) }}
+                                                                <div class="number-sm">
+                                                                    ${{ number_format($todayProfitSum, 2) }}
                                                                 </div>
                                                             </div>
                                                             <div class="nk-iv-wg3-subtitle">
@@ -159,7 +160,8 @@
                                         <div class="nk-iv-scheme-info">
                                             <div class="nk-iv-scheme-name">
                                                 {{ $activeInvestment->product->name }} - Daily
-                                                {{ ($activeInvestment->daily_profit_amount/$userProduct->invested_amount) * 100 }}% for
+                                                {{ ($activeInvestment->daily_profit_amount / $activeInvestment->invested_amount) * 100 }}%
+                                                for
                                                 {{ $activeInvestment->product->tenor }}
                                             </div>
                                             <div class="nk-iv-scheme-desc">
@@ -237,7 +239,8 @@
                                         <div class="nk-iv-scheme-info">
                                             <div class="nk-iv-scheme-name">
                                                 {{ $inactiveInvestment->product->name }} - Daily
-                                                {{ ($inactiveInvestment->daily_profit_amount/$userProduct->invested_amount) * 100 }}% for
+                                                {{ ($inactiveInvestment->daily_profit_amount / $inactiveInvestment->invested_amount) * 100 }}%
+                                                for
                                                 {{ $inactiveInvestment->product->tenor }}
                                             </div>
                                             <div class="nk-iv-scheme-desc">
@@ -263,13 +266,13 @@
 
                                                     // Get profit
                                                     // Calculate total profit earned so far
-                                                    $createdAt = \Carbon\Carbon::parse($userProduct->created_at);
+                                                    $createdAt = \Carbon\Carbon::parse($inactiveInvestment->created_at);
                                                     $now = \Carbon\Carbon::now();
                                                     // Calculate the difference in days
                                                     $numberOfDays = $createdAt->diffInDays($now);
 
                                                     // Total profit
-                                                    $profit = $numberOfDays * $userProduct->daily_profit_amount;
+                                                    $profit = $numberOfDays * $inactiveInvestment->daily_profit_amount;
 
                                                 @endphp
                                                 <span class="nk-iv-scheme-label text-soft">Total Return</span><span

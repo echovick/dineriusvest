@@ -83,6 +83,7 @@ class AuthController extends Controller
 
             // If user is customer
             if($user->type == 'customer'){
+                $this->syncInvestmentData();
                 return redirect()->route('dashboard.index');
             }
         }catch(\Exception $e){
@@ -151,5 +152,16 @@ class AuthController extends Controller
         $refferedby = User::where('referral_code', $ref)->first();
         $user->referred_by = $refferedby->id;
         $user->save();
+    }
+
+    private function syncInvestmentData()
+    {
+        $user = Auth::user();
+
+        if($user->investments->count() > 0){
+            foreach($user->investments as $investment){
+                $investment->sync();
+            }
+        }
     }
 }

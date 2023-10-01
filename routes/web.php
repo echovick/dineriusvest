@@ -34,6 +34,7 @@ Route::group(['prefix' => ''], function () {
     Route::get('/products', [SiteController::class, 'products'])->name('site.products');
     Route::get('/guide', [SiteController::class, 'guide'])->name('site.guide');
     Route::get('/education', [SiteController::class, 'education'])->name('site.education');
+    Route::get('/education/{chapter}', [SiteController::class, 'educationChapterInfo'])->name('site.education.chapter');
     Route::get('/contact', [SiteController::class, 'contact'])->name('site.contact');
     Route::get('/signin', [SiteController::class, 'signin'])->name('login');
     Route::get('/signup', [SiteController::class, 'signup'])->name('site.signup');
