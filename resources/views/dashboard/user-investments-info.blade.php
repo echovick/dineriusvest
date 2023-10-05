@@ -104,7 +104,7 @@
                                                         // Get total expected profit
                                                         $expectedProfit = ($userProduct->product->interest_rate / 100) * $userProduct->invested_amount;
                                                         // Initialise expected profit to 1 if its less than 0 to avoid division by 0 error
-                                                        if ($expectedProfit < 0) {
+                                                        if ($expectedProfit <= 0) {
                                                             $expectedProfit = 1;
                                                         }
 
@@ -341,7 +341,7 @@
 
                                                     // Calculate the remaining days
                                                     $remainingDays = $now->diffInDays($endDate);
-                                                    if($numberOfDays < 0){
+                                                    if($numberOfDays <= 0){
                                                         $numberOfDays = 1;
                                                     }
                                                 @endphp

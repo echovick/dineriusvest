@@ -164,7 +164,7 @@
                                                     $previousInvestmentBalance = $user?->investments?->where('active_account', $user->wallet->active_account)->sum('previous_balance');
 
                                                     // To avoid division by zero error, initiate denominator to 1 if its less than 0
-                                                    if($currentInvestmentBalance < 0){
+                                                    if($currentInvestmentBalance <= 0){
                                                         $currentInvestmentBalance = 1;
                                                     }
 
