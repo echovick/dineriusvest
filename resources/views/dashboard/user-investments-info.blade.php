@@ -16,8 +16,11 @@
                             <div class="nk-block-between-md g-4">
                                 <div class="nk-block-head-content">
                                     <h2 class="nk-block-title fw-normal">
+                                        @php
+                                            $invested_amount = $userProduct->invested_amount > 0 ? $userProduct->invested_amount : 1;
+                                        @endphp
                                         {{ $userProduct->product->name }} - Daily
-                                        {{ ($userProduct->daily_profit_amount / $userProduct->invested_amount) * 100 }}% for
+                                        {{ ($userProduct->daily_profit_amount / $invested_amount) * 100 }}% for
                                         {{ $userProduct->product->tenor }}
                                     </h2>
                                     <div class="nk-block-des">
@@ -100,6 +103,11 @@
 
                                                         // Get total expected profit
                                                         $expectedProfit = ($userProduct->product->interest_rate / 100) * $userProduct->invested_amount;
+                                                        // Initialise expected profit to 1 if its less than 0 to avoid division by 0 error
+                                                        if ($expectedProfit < 0) {
+                                                            $expectedProfit = 1;
+                                                        }
+
                                                         $profitChangePercentage = ($totalProfitEarnedSofar / $expectedProfit) * 100;
                                                         if ($profitChangePercentage >= 0) {
                                                             $profitChangePercentageSignClass = 'number-up';
@@ -168,7 +176,10 @@
                                     <li>
                                         <div class="sub-text">Daily interest</div>
                                         <div class="lead-text">
-                                            ${{ ($userProduct->daily_profit_amount / $userProduct->invested_amount) * 100 }}
+                                            @php
+                                                $invested_amount = $userProduct->invested_amount > 0 ? $userProduct->invested_amount : 1;
+                                            @endphp
+                                            ${{ ($userProduct->daily_profit_amount / $invested_amount) * 100 }}
                                         </div>
                                     </li>
                                 </ul>
@@ -289,7 +300,10 @@
                                                     data-width="240" data-height="125" data-displayInput="false" />
                                                 <div class="nk-iv-wg5-ck-result">
                                                     <div class="text-lead sm">
-                                                        {{ ($userProduct->daily_profit_amount / $userProduct->invested_amount) * 100 }}%
+                                                        @php
+                                                            $invested_amount = $userProduct->invested_amount > 0 ? $userProduct->invested_amount : 1;;
+                                                        @endphp
+                                                        {{ ($userProduct->daily_profit_amount / $invested_amount) * 100 }}%
                                                     </div>
                                                     <div class="text-sub">Daily profit</div>
                                                 </div>
@@ -327,6 +341,9 @@
 
                                                     // Calculate the remaining days
                                                     $remainingDays = $now->diffInDays($endDate);
+                                                    if($numberOfDays < 0){
+                                                        $numberOfDays = 1;
+                                                    }
                                                 @endphp
                                                 <input type="text" class="knob-half"
                                                     value="{{ 100 - ($remainingDays / $numberOfDays) * 100 }}"
@@ -376,7 +393,8 @@
                                                     <span class="sub-text">{{ $productTransaction->created_at }}</span>
                                                 </td>
                                                 <td class="tb-col-time tb-col-end">
-                                                    <span class="lead-text text-{{ $productTransaction->charge_type == 'debit' ? 'danger' : 'primary' }}">
+                                                    <span
+                                                        class="lead-text text-{{ $productTransaction->charge_type == 'debit' ? 'danger' : 'primary' }}">
                                                         {{ $productTransaction->charge_type == 'debit' ? '-' : '+' }}
                                                         {{ $productTransaction->amount }}
                                                     </span>

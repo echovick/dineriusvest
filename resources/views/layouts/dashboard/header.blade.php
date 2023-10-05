@@ -288,7 +288,7 @@
                                                     Verified
                                                 </div>
                                                 <div class="user-name dropdown-indicator">
-                                                    {{ ucwords($user->wallet->active_account) }} Account
+                                                    {{ ucwords($user?->wallet?->active_account) }} Account
                                                 </div>
                                             </div>
                                         </div>
@@ -299,7 +299,7 @@
                                             <div class="uk-container d-flex justify-content-between mb-1">
                                                 <div>
                                                     <span>Account Type:
-                                                        @if ($user->wallet->active_account === 'live')
+                                                        @if ($user?->wallet?->active_account === 'live')
                                                             <span class="badge bg-success">LIVE</span>
                                                         @else
                                                             <span class="badge bg-warning">DEMO</span>
@@ -311,11 +311,11 @@
                                                     action="{{ route('dashboard.toggleActiveAccount') }}">
                                                     @csrf
                                                     <input type="text" name="wallet_id" id=""
-                                                        value="{{ $user->wallet->id }}" hidden>
+                                                        value="{{ $user?->wallet?->id }}" hidden>
                                                     <input type="text" name="active_account"
-                                                        value="{{ $user->wallet->active_account === 'live' ? 'demo' : 'live' }}"
+                                                        value="{{ $user?->wallet?->active_account === 'live' ? 'demo' : 'live' }}"
                                                         id="" hidden>
-                                                    <div class="toggle-switch {{ $user->wallet->active_account === 'live' ? 'on' : '' }}"
+                                                    <div class="toggle-switch {{ $user?->wallet?->active_account === 'live' ? 'on' : '' }}"
                                                         onclick="toggleSwitchAndSubmit(this)">
                                                         <div class="toggle-handle"></div>
                                                     </div>
@@ -325,9 +325,9 @@
                                             <div class="user-card">
                                                 <div class="user-avatar"><span>AB</span></div>
                                                 <div class="user-info">
-                                                    <span class="lead-text">{{ $user->profile->first_name }}
-                                                        {{ $user->profile->last_name }}</span><span
-                                                        class="sub-text">{{ $user->email }}</span>
+                                                    <span class="lead-text">{{ $user?->profile?->first_name }}
+                                                        {{ $user?->profile?->last_name }}</span><span
+                                                        class="sub-text">{{ $user?->email }}</span>
                                                 </div>
                                                 <div class="user-action">
                                                     <a class="btn btn-icon me-n2" href="profile-setting.html"><em
@@ -339,7 +339,7 @@
                                         <div class="dropdown-inner user-account-info">
                                             <h6 class="overline-title-alt">Account Balance</h6>
                                             <div class="user-balance">
-                                                @if ($user->wallet->active_account === 'live')
+                                                @if ($user?->wallet?->active_account === 'live')
                                                     ${{ number_format($user?->wallet?->balance_after, 2) ?? 0 }}
                                                 @else
                                                     ${{ number_format($user?->wallet?->demo_balance_after, 2) ?? 0 }}
@@ -351,7 +351,7 @@
                                                 <span>0.00
                                                     <span class="currency currency-usd">USD</span></span>
                                             </div>
-                                            @if ($user->wallet->active_account === 'live')
+                                            @if ($user?->wallet?->active_account === 'live')
                                                 <a href="#" class="link"><span>Withdraw Balance</span>
                                                     <em class="icon ni ni-wallet-out"></em></a>
                                             @else

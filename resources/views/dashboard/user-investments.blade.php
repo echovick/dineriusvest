@@ -159,8 +159,11 @@
                                         </div>
                                         <div class="nk-iv-scheme-info">
                                             <div class="nk-iv-scheme-name">
+                                                @php
+                                                    $invested_amount = $activeInvestment->invested_amount > 0 ? $activeInvestment->invested_amount : 1;
+                                                @endphp
                                                 {{ $activeInvestment->product->name }} - Daily
-                                                {{ ($activeInvestment->daily_profit_amount / $activeInvestment->invested_amount) * 100 }}%
+                                                {{ ($activeInvestment->daily_profit_amount / $invested_amount) * 100 }}%
                                                 for
                                                 {{ $activeInvestment->product->tenor }}
                                             </div>
@@ -238,8 +241,11 @@
                                         </div>
                                         <div class="nk-iv-scheme-info">
                                             <div class="nk-iv-scheme-name">
+                                                @php
+                                                    $invested_amount = $inactiveInvestment->invested_amount > 0 ? $inactiveInvestment->invested_amount : 1;
+                                                @endphp
                                                 {{ $inactiveInvestment->product->name }} - Daily
-                                                {{ ($inactiveInvestment->daily_profit_amount / $inactiveInvestment->invested_amount) * 100 }}%
+                                                {{ ($inactiveInvestment->daily_profit_amount / $invested_amount) * 100 }}%
                                                 for
                                                 {{ $inactiveInvestment->product->tenor }}
                                             </div>

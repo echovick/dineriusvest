@@ -45,8 +45,11 @@
                                                             My Active Plans
                                                         </div>
                                                         <h6 class="nk-iv-wg1-info title">
+                                                            @php
+                                                                $invested_amount = $investment->invested_amount > 0 ? $investment->invested_amount : 1;
+                                                            @endphp
                                                             {{ $investment->product->name }} -
-                                                            {{ ($investment->daily_profit_amount / $investment->invested_amount) * 100 }}%
+                                                            {{ ($investment->daily_profit_amount / $invested_amount) * 100 }}%
                                                             for
                                                             {{ $investment->product->tenor }}
                                                         </h6>
@@ -159,6 +162,11 @@
                                                     // Calculate change in total invested, by getting the percentage change from all before and after balance of investments
                                                     $currentInvestmentBalance = $user?->investments?->where('active_account', $user->wallet->active_account)->sum('current_balance');
                                                     $previousInvestmentBalance = $user?->investments?->where('active_account', $user->wallet->active_account)->sum('previous_balance');
+
+                                                    // To avoid division by zero error, initiate denominator to 1 if its less than 0
+                                                    if($currentInvestmentBalance < 0){
+                                                        $currentInvestmentBalance = 1;
+                                                    }
 
                                                     $changeInBalancePercentage = (($currentInvestmentBalance - $previousInvestmentBalance) / $currentInvestmentBalance) * 100;
                                                 @endphp
