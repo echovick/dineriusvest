@@ -3,17 +3,22 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class SetupAccountController extends Controller
 {
     public function index()
     {
-        return view('dashboard.complete-profile');
+        $productCategory = ProductCategory::all();
+
+        return view('dashboard.complete-profile', compact('productCategory'));
     }
 
     public function pendingProfileCompletion()
     {
-        return view('dashboard.pending-profile-completion');
+        $productCategory = ProductCategory::all();
+
+        return view('dashboard.pending-profile-completion', compact('productCategory'));
     }
 }

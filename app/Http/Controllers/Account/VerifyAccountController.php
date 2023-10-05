@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\ProductCategory;
 
 class VerifyAccountController extends Controller
 {
     //
     public function index()
     {
-        return view('dashboard.verify-kyc');
+        $productCategory = ProductCategory::all();
+
+        return view('dashboard.verify-kyc', compact('productCategory'));
     }
 
     public function verifyEmail()
     {
-        return view('dashboard.verify-email');
+        $productCategory = ProductCategory::all();
+
+        return view('dashboard.verify-email', compact('productCategory'));
     }
 }
