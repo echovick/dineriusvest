@@ -66,7 +66,7 @@
                             <div class="in-optional-nav">
                                 <a href="{{ url('/signin') }}" class="uk-button uk-button-text"><i
                                         class="fas fa-user-circle uk-margin-small-right"></i>Log in</a>
-                                <a href="#"
+                                <a href="{{ url('/signup') }}"
                                     class="uk-button uk-button-primary uk-button-small uk-border-pill">Sign up</a>
                             </div>
                         </div>
