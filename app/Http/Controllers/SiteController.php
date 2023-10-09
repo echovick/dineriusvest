@@ -58,4 +58,9 @@ class SiteController extends Controller
         // Get the education chapter
         return view('site.education-chapter', compact('chapter'));
     }
+
+    public function riskManagement()
+    {
+        return view('site.risk-management');
+    }
 }

@@ -31,6 +31,7 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['prefix' => ''], function () {
     Route::get('/', [SiteController::class, 'home'])->name('site.home');
     Route::get('/about', [SiteController::class, 'about'])->name('site.about');
+    Route::get('/risk-management', [SiteController::class, 'riskManagement'])->name('site.risk-management');
     Route::get('/products', [SiteController::class, 'products'])->name('site.products');
     Route::get('/guide', [SiteController::class, 'guide'])->name('site.guide');
     Route::get('/education', [SiteController::class, 'education'])->name('site.education');

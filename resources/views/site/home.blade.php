@@ -21,7 +21,7 @@
                                         <h1>DENARIUSVEST Revolutionizing Investment Standards worldwide</h1>
                                         <p class="uk-text-lead uk-visible@m">Experience a revolutionary investment approach
                                             with Denariusvest, setting us apart from the competition</p>
-                                        <a href="#"
+                                        <a href="{{ url('about') }}"
                                             class="uk-button uk-button-primary uk-border-rounded uk-visible@m"><i
                                                 class="fas fa-scroll uk-margin-small-right"></i>Discover it now</a>
                                     </div>
@@ -100,7 +100,9 @@
                                 potential risks before they become concerns.
                             </p>
                             <p style="font-size: 13px !important; text-align:center !important;">We invite you to explore
-                                more about investment risk and gain insight into our proactive risk management approach.</p>
+                                more about investment risk and gain insight into our proactive risk management approach. <a
+                                    href="{{ url('risk-management') }}" style="text-decoration: underline">Learn More</a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -116,7 +118,7 @@
                         <img src="{{ asset('img/in-wave-background-2.png') }}" alt="wave-hq" width="540" height="513">
                     </div>
                     <div class="uk-width-1-1">
-                        <h1>Join a club of more than <span class="in-highlight">480,000</span> investors</h1>
+                        <h1>Join a club of more than <span class="in-highlight">260,000</span> investors</h1>
                     </div>
                     <div class="uk-width-3-5@m">
                         <div class="uk-grid-medium uk-child-width-1-2@s uk-child-width-1-2@m uk-margin-medium-top uk-margin-medium-bottom"
@@ -133,7 +135,7 @@
                                     </div>
                                     <p class="uk-margin-small-top">Denariusvest, a trusted partner, has been chosen and
                                         relied upon by more than 300,000 clients worldwide, managing an impressive portfolio
-                                        of assets totaling over $29 billion.</p>
+                                        of assets</p>
                                 </div>
                             </div>
                             <div>
@@ -160,7 +162,7 @@
                                             <h4 class="uk-margin-remove">RATING</h4>
                                         </div>
                                     </div>
-                                    <p class="uk-margin-small-top"> With an outstanding rating of 4.82 based on over 42,000
+                                    <p class="uk-margin-small-top"> With an outstanding rating of 4.82 based on over 11,000
                                         reviews, Denariusvest consistently earns the trust and satisfaction of our valued
                                         clients.</p>
                                 </div>
@@ -216,8 +218,7 @@
                             {{-- <h1 class="uk-margin-top">0.2</h1>
                             <p class="uk-margin-remove-top uk-margin-bottom">pip</p> --}}
                             <p>Experience the potential for substantial growth with Denariusvest impressive average APY of
-                                12.6%, and the opportunity to reach as high as 35% based on your selected investment
-                                program. This surpasses traditional bank investment systems, delivering returns that are
+                                12.6%. This surpasses traditional bank investment systems, delivering returns that are
                                 twice as significant and 16 times the international average. Achieve your short-term and
                                 long-term financial objectives with confidence.</p>
                         </div>
@@ -424,7 +425,8 @@ uk-child-width-1-5@m uk-text-center uk-margin-large-top uk-flex uk-flex-center"
                     <div class="uk-width-3-5@m">
                         <h2 class="uk-margin-remove-bottom">Financial strength you can depend on</h2>
                         <p>providing stability and security for your investment journey.<a
-                                class="uk-text-small uk-text-uppercase uk-margin-small-left" href="#">Learn
+                                class="uk-text-small uk-text-uppercase uk-margin-small-left"
+                                href="{{ url('about') }}">Learn
                                 more<i class="fas fa-long-arrow-alt-right fa-sm uk-margin-small-left"></i></a></p>
                     </div>
                 </div>

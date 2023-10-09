@@ -11,7 +11,7 @@
                 <div class="uk-width-1-1 uk-flex uk-flex-center">
                     <div class="uk-width-3-4@m uk-margin-medium-bottom">
                         <p class="uk-text-lead">We have streamlined the account creation process to ensure a seamless and secure experience for you. Here's a simple and straightforward guide to get you started</p>
-                      <p>You can follow our progress here or follow us on Twitter   <a href="#"><i class="fab fa-twitter"></i><span class="uk-text-lowercase">@denriusvest</span></a></p>
+                      <p>You can follow our progress here or follow us on instagram   <a href="#"><i class="fab fa-instagram"></i><span class="uk-text-lowercase">@denriusvest</span></a></p>
                     </div>
                 </div>
                 <div class="uk-width-1-1 in-timeline-1">
