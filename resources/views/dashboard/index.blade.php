@@ -358,7 +358,7 @@
                                         <div class="nk-refwg-title">
                                             <h5 class="title">Refer Us & Earn</h5>
                                             <div class="title-sub">
-                                                Use the bellow link to invite your friends.
+                                                Use the bellow link to invite your friends. 15% of their initial deposit
                                             </div>
                                         </div>
                                         <div class="nk-refwg-action">

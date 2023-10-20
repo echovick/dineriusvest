@@ -74,19 +74,21 @@
                         </div>
                         <div class="nk-header-brand">
                             <a href="{{ url('account') }}" class="logo-link"><img class="logo-light logo-img"
-                                    src="img/logo.png" srcset="/demo6/images/logo2x.png 2x" alt="logo" /><img
-                                    class="logo-dark logo-img" src="img/logo.png"
-                                    srcset="/demo6/images/logo-dark2x.png 2x" alt="logo-dark" /><span
-                                    class="nio-version">Invest</span></a>
+                                    src="{{ asset('img/logo2.png') }}" srcset="{{ asset('img/logo2.png') }}" alt="logo" /><img
+                                    class="logo-dark logo-img" src="{{ asset('img/logo2.png') }}"
+                                    srcset="{{ asset('img/logo2.png') }}" alt="logo-dark" />
+                                    {{-- <span class="nio-version">Invest</span> --}}
+                                </a>
                         </div>
                         <div class="nk-header-menu" data-content="headerNav">
                             <div class="nk-header-mobile">
                                 <div class="nk-header-brand">
                                     <a href="{{ url('account') }}" class="logo-link"><img class="logo-light logo-img"
-                                            src="img/logo.png" srcset="/demo6/images/logo2x.png 2x"
-                                            alt="logo" /><img class="logo-dark logo-img" src="img/logo.png"
-                                            srcset="/demo6/images/logo-dark2x.png 2x" alt="logo-dark" /><span
-                                            class="nio-version">Invest</span></a>
+                                            src="{{ asset('img/logo2.png') }}" srcset="{{ asset('img/logo2.png') }}"
+                                            alt="logo" /><img class="logo-dark logo-img" src="{{ asset('img/logo2.png') }}"
+                                            srcset="{{ asset('img/logo2.png') }}" alt="logo-dark" />
+                                            {{-- <span class="nio-version">Invest</span> --}}
+                                    </a>
                                 </div>
                                 <div class="nk-menu-trigger me-n2">
                                     <a href="#" class="nk-nav-toggle nk-quick-nav-icon"
@@ -125,12 +127,12 @@
                                                     class="nk-menu-text">Consult Our Experts</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="invest-form.html" class="nk-menu-link"><span
+                                            <a href="{{ url('contact') }}" class="nk-menu-link"><span
                                                     class="nk-menu-text">Customer Service</span></a>
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="scheme-details.html" class="nk-menu-link"><span
-                                                    class="nk-menu-text">Compounds Interest Calculator</span></a>
+                                                    class="nk-menu-text">Our Quarterly Reports</span></a>
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="scheme-details.html" class="nk-menu-link"><span

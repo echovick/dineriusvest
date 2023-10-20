@@ -13,7 +13,7 @@
                             <div class="nk-block-between-md g-4">
                                 <div class="nk-block-head-content">
                                     <h2 class="nk-block-title fw-normal">
-                                        Invested Schemes
+                                        Invested Products
                                     </h2>
                                     <div class="nk-block-des">
                                         <p>
@@ -30,7 +30,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('dashboard.investment.new', 1) }}"
-                                                class="btn btn-white btn-light"><span>Invest More</span>
+                                                class="btn btn-white btn-light"><span>Deposit</span>
                                                 <em class="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a>
                                         </li>
                                         <li class="opt-menu-md dropdown">

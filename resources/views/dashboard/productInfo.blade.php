@@ -71,9 +71,21 @@
                                                     <h4>About Investment</h4>
                                                     <span class="sub-text sub-text-sm text-soft">7 minutes read</span>
                                                 </div>
-                                                <p>
-                                                    {{ $product->description }}
-                                                </p>
+
+                                                {{-- Benefits --}}
+                                                <span class="sub-text sub-text-sm text-soft mt-3">Benefits</span>
+                                                <ul class="list list-sm list-checked">
+                                                    @php
+                                                        $parts = explode(",", $product->benefits);
+                                                    @endphp
+                                                    @foreach ($parts as $part)
+                                                    <li>
+                                                        <span>{{ $part }}</span>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+
+                                                {{-- Requrements --}}
                                                 <span class="sub-text sub-text-sm text-soft">Requirements</span>
                                                 <ul class="list list-sm list-checked">
                                                     <li>
@@ -92,20 +104,20 @@
                                                         <span>{{ $part[1] ?? '' }}</span>
                                                     </li>
                                                     @endif
-                                                </ul>
-
-                                                <span class="sub-text sub-text-sm text-soft mt-3">benefits</span>
-                                                <ul class="list list-sm list-checked">
                                                     @php
-                                                        $parts = explode(",", $product->benefits);
+                                                        $parts = explode(",", $product->requirements);
                                                     @endphp
                                                     @foreach ($parts as $part)
                                                     <li>
-                                                        Minimum primary deposit:
                                                         <span>{{ $part }}</span>
                                                     </li>
                                                     @endforeach
                                                 </ul>
+
+                                                {{-- Product Description --}}
+                                                <p>
+                                                    {{ $product->description }}
+                                                </p>
                                                 <a href="{{ route('dashboard.investment.new', $product->id) }}" class="btn btn-md btn-primary">Get Started</a>
                                                 <a href="{{ route('dashboard.investments') }}" class="btn btn-md btn-secondary">Back</a>
                                             </div>
