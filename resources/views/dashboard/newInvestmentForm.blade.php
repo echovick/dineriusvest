@@ -10,8 +10,9 @@
                     <div class="nk-block-head nk-block-head-lg">
                         <div class="nk-block-head-content">
                             <div class="nk-block-head-sub">
-                                <a href="{{ route('dashboard.investmentInfo', $product->id) }}" class="back-to"><em
-                                        class="icon ni ni-arrow-left"></em><span>Back</span></a>
+                                <a href="{{ route('dashboard.investmentInfo', $product->id) }}" class="back-to">
+                                    <img style="width:15px; margin-right:10px;" src="{{ asset('icons/fa-arrow-back.svg') }}" alt="">
+                                    <span>Back</span></a>
                             </div>
                             <div class="nk-block-head-content">
                                 <h2 class="nk-block-title fw-normal">
@@ -161,7 +162,7 @@
                                                             </div>
                                                         </a>
                                                     </li>
-                                                    <li class="invest-cc-item selected">
+                                                    {{-- <li class="invest-cc-item selected">
                                                         <a href="#" class="invest-cc-opt" data-plan="starter">
                                                             <div class="coin-item">
                                                                 <div class="coin-icon">
@@ -173,7 +174,7 @@
                                                                 </div>
                                                             </div>
                                                         </a>
-                                                    </li>
+                                                    </li> --}}
                                                 </ul>
                                             </div>
                                         </div>

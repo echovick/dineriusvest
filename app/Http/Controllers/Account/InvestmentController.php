@@ -86,7 +86,7 @@ class InvestmentController extends Controller
 
     public function newInvestmentForm($id)
     {
-        if(isset($_GET['plan-iv'])){
+        if (isset($_GET['plan-iv'])) {
             $id = $_GET['plan-iv'];
         }
 
@@ -94,7 +94,7 @@ class InvestmentController extends Controller
         $user = Auth::user();
 
         // Get current investment product
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
 
         // Get current investment product
         $productCategory = ProductCategory::all();
@@ -175,7 +175,7 @@ class InvestmentController extends Controller
 
     public function showSubscribedDetails($id)
     {
-        try{
+        try {
             // Get auth user
             $user = Auth::user();
 
@@ -188,12 +188,13 @@ class InvestmentController extends Controller
             $productCategory = ProductCategory::all();
 
             return view('dashboard.user-investments-info', compact('user', 'userProduct', 'productCategory'));
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return back()->with('error', 'Something went wrong - ' . $e->getMessage());
         }
     }
 
-    public function prepareTransactionQueryData($request, $userProduct){
+    public function prepareTransactionQueryData($request, $userProduct)
+    {
         return [
             'user_id' => Auth::id(),
             'user_product_id' => $userProduct->id,
@@ -204,7 +205,7 @@ class InvestmentController extends Controller
             'balance_after_charge' => $userProduct->current_balance,
             'charge_type' => 'credit',
             'active_account' => $userProduct->active_account,
-            'created_at' => Carbon::now()
+            'created_at' => Carbon::now(),
         ];
     }
 

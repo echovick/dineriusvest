@@ -15,23 +15,23 @@
     <meta name="author" content="Indonez">
     <meta name="theme-color" content="#FCB42D">
     <!-- preload assets -->
-    <link rel="preload" href="fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/rubik-v9-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/rubik-v9-latin-500.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/rubik-v9-latin-300.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="css/style.css" as="style">
-    <link rel="preload" href="js/vendors/uikit.min.js" as="script">
-    <link rel="preload" href="js/utilities.min.js" as="script">
-    <link rel="preload" href="js/config-theme.js" as="script">
+    <link rel="preload" href="{{ asset('fonts/fa-brands-400.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('fonts/fa-solid-900.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('fonts/rubik-v9-latin-regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('fonts/rubik-v9-latin-500.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('fonts/rubik-v9-latin-300.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('css/style.css') }}" as="style">
+    <link rel="preload" href="{{ asset('js/vendors/uikit.min.js') }}" as="script">
+    <link rel="preload" href="{{ asset('js/utilities.min.js') }}" as="script">
+    <link rel="preload" href="{{ asset('js/config-theme.js') }}" as="script">
     <!-- stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- uikit -->
-    <script src="js/vendors/uikit.min.js"></script>
+    <script src="{{ asset('js/vendors/uikit.min.js') }}"></script>
     <!-- favicon -->
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
     <!-- touch icon -->
-    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon.png">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('img/apple-touch-icon.png') }}">
     <title>@yield('title')</title>
 </head>
 
@@ -52,7 +52,7 @@
                 <div class="uk-container" data-uk-navbar>
                     <div class="uk-navbar-left uk-width-expand uk-flex uk-flex-between">
                         <a class="uk-navbar-item uk-logo" href="{{ url('/') }}" data-logo-inverse="sticky-only: true">
-                            <img src="img/logo.png" alt="logo" width="134" height="23">
+                            <img src="{{ asset('img/logo2.png') }}" alt="logo" style="width: 65px">
                         </a>
                         <ul class="uk-navbar-nav uk-visible@m">
                             <li><a href="/">Home</a>

@@ -14,6 +14,8 @@
     <title>Investment Dashboard | Deneriusvest Admin Template</title>
     <link rel="stylesheet" href="{{ asset('dashboard/assets/css/dashlitedeae.css?ver=3.2.1') }}" />
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/css/themedeae.css?ver=3.2.1') }}" />
+    <!-- Bootstrap CSS -->
+    {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> --}}
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91615293-4"></script>
     <script>
         window.dataLayer = window.dataLayer || [];

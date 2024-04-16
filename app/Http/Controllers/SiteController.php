@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\Education;
+
 class SiteController extends Controller
 {
     public function home()
@@ -56,6 +58,8 @@ class SiteController extends Controller
     public function educationChapterInfo($chapter)
     {
         // Get the education chapter
+        if($chapter > 6) $chapter = 0;
+        $chapter = (new Education)->getChapters($chapter);
         return view('site.education-chapter', compact('chapter'));
     }
 

@@ -118,10 +118,15 @@
                                     <div class="card-inner">
                                         <div class="nk-iv-wg2">
                                             <div class="nk-iv-wg2-title">
-                                                <h6 class="title">
-                                                    Available Balance
-                                                    <em class="icon ni ni-info"></em>
-                                                </h6>
+                                                <div class="d-flex justify-content-between">
+                                                    <h6 class="title">
+                                                        Available Balance
+                                                        <em class="icon ni ni-info"></em>
+                                                    </h6>
+                                                    <div>
+                                                        <a href="{{ url('account/top-up') }}" class="btn btn-white btn-light">Top Up</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="nk-iv-wg2-text">
                                                 {{-- Live balance --}}

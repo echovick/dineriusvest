@@ -34,6 +34,7 @@
     <!-- touch icon -->
     <link rel="apple-touch-icon-precomposed" href="{{ asset('img/apple-touch-icon.png') }}">
     <title>@yield('title')</title>
+    <script src="https://kit.fontawesome.com/dcf3d07c5a.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -44,7 +45,7 @@
                 <div class="uk-container" data-uk-navbar>
                     <div class="uk-navbar-left uk-width-expand uk-flex uk-flex-between">
                         <a class="uk-navbar-item uk-logo" href="{{ url('/') }}" data-logo-inverse="sticky-only: true">
-                            <img src="img/logo.png" alt="logo" width="134" height="23">
+                            <img src="{{ asset('img/logo2.png') }}" style="width: 65px" alt="logo">
                         </a>
                         <ul class="uk-navbar-nav uk-visible@m">
                             <li><a href="/">Home</a>

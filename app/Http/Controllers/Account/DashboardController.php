@@ -49,6 +49,12 @@ class DashboardController extends Controller
         return redirect()->back();
     }
 
+    public function submitTopUpRequest(Request $request)
+    {
+        // return redirect()->back();
+        return back()->with('success', 'Request Submitted Successfully, we will review & confirm your payment');
+    }
+
     public function refreshDemoBalance(Request $request)
     {
         // Get authenticated user
@@ -63,5 +69,20 @@ class DashboardController extends Controller
         $wallet->save();
 
         return redirect()->back();
+    }
+
+    public function topupBalancePage()
+    {
+        if (isset($_GET['plan-iv'])) {
+            $id = $_GET['plan-iv'];
+        }
+
+        // Get user
+        $user = Auth::user();
+
+        // Get current investment product
+        $productCategory = ProductCategory::all();
+
+        return view('dashboard.account-topup', compact('user', 'productCategory'));
     }
 }

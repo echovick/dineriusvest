@@ -24,7 +24,7 @@
                                 <div class="uk-width-expand@m">
                                     <h5 class="uk-margin-remove-bottom">The Art of Investment</h5>
                                     <p class="uk-margin-small-top">A Comprehensive Guide to Maximizing Returns and Building Wealth</p>
-                                    <a class="uk-button uk-button-primary uk-border-rounded" href="#">Start
+                                    <a class="uk-button uk-button-primary uk-border-rounded" href="{{ route('site.education.chapter', 1) }}">Start
                                         Learning</a>
                                 </div>
                                 <div class="uk-width-auto@m uk-visible@m">
@@ -188,9 +188,17 @@
                                         <a class="uk-button uk-button-default uk-border-rounded uk-width-expand"
                                             href="#">Fast Academy</a>
                                     </div>
-                                    <div>
+                                    <div class="in-wave-video" data-uk-lightbox="video-autoplay: true;">
                                         <a class="uk-button uk-button-default uk-border-rounded uk-width-expand"
-                                            href="#">Video Tutorials</a>
+                                            href="{{ asset('video/WhatsApp Video 2023-07-27 at 01.44.48_2913487b.mp4') }}" data-attrs="width: 920; height: 517;">
+                                            <div class="in-play-button"></div>
+                                            Video Tutorials
+                                        </a>
+                                        <div class="uk-flex-top" data-uk-modal>
+                                            <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical in-iframe">
+                                                <button class="uk-modal-close-outside" type="button" data-uk-close></button>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div>
                                         <a class="uk-button uk-button-default uk-border-rounded uk-width-expand"

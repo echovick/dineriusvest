@@ -58,6 +58,8 @@ Route::group(['prefix' => 'account', 'middleware' => 'auth'], function () {
     Route::get('/investment-category/{id}', [InvestmentController::class, 'investmentCategoryDetails'])->name('dashboard.investmentCategoryDetails');
     Route::get('/investment/{id}/new', [InvestmentController::class, 'newInvestmentForm'])->name('dashboard.investment.new');
     Route::get('/products', [ProductController::class, 'index'])->name('dashboard.investment.products');
+    Route::get('/top-up', [DashboardController::class, 'topupBalancePage'])->name('dashboard.topupBalancePage');
+    Route::post('/top-up', [DashboardController::class, 'submitTopUpRequest'])->name('dashboard.topup.submit');
 
     // Switch account type
     Route::post('toggle-active-account', [DashboardController::class, 'toggleActiveAccount'])->name('dashboard.toggleActiveAccount');
