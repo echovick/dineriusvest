@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Mail\SendOtp;
 use App\Models\User;
+use App\Services\ProfileActivityService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,10 +16,12 @@ use Illuminate\Support\Facades\Mail;
 class AuthController extends Controller
 {
     protected $otpController;
+    protected ProfileActivityService $profileActivityService;
 
     public function __construct()
     {
         $this->otpController = new OtpController;
+        $this->profileActivityService = new ProfileActivityService;
     }
 
     public function register(StoreUserRequest $request)
@@ -60,33 +63,36 @@ class AuthController extends Controller
         }
     }
 
-    public function login(Request $request){
-        try{
+    public function login(Request $request)
+    {
+        try {
             $data = $request->validate([
                 'username' => 'required',
-                'password' => 'required'
+                'password' => 'required',
             ]);
 
             // Check if user exists
             $user = User::where('username', $data['username'])->orWhere('email', $data['username'])->first();
-            if(!$user){
+            if (!$user) {
                 return redirect()->route('login')->with('msg', 'Sorry, user doesnt exist on our database');
             }
 
             // Validate password
-            if(!Hash::check(request('password'), $user->password)){
+            if (!Hash::check(request('password'), $user->password)) {
                 return redirect()->route('login')->with('msg', 'Wrong Password');
             }
 
             // Log user in
             Auth::login($user, true);
 
+            $this->profileActivityService->registerLoginActivity($request); // Register login Activity
+
             // If user is customer
-            if($user->type == 'customer'){
+            if ($user->type == 'customer') {
                 $this->syncInvestmentData();
                 return redirect()->route('dashboard.index');
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->route('login')->with("msg", $e->getMessage());
         }
     }
@@ -158,10 +164,16 @@ class AuthController extends Controller
     {
         $user = Auth::user();
 
-        if($user->investments->count() > 0){
-            foreach($user->investments as $investment){
+        if ($user->investments->count() > 0) {
+            foreach ($user->investments as $investment) {
                 $investment->sync();
             }
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

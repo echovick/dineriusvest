@@ -369,26 +369,26 @@
                                         <div class="dropdown-inner">
                                             <ul class="link-list">
                                                 <li>
-                                                    <a href="profile-activity.html"><em
+                                                    <a href="{{ route('page.profileActivity') }}"><em
                                                             class="icon ni ni-activity-alt"></em><span>Login
                                                             Activity</span></a>
                                                 </li>
                                                 <li>
-                                                    <a href="profile.html"><em
+                                                    <a href="{{ route('page.profile') }}"><em
                                                             class="icon ni ni-user-alt"></em><span>View
                                                             Profile</span></a>
                                                 </li>
-                                                <li>
+                                                {{-- <li>
                                                     <a href="profile-activity.html"><em
                                                             class="icon ni ni-activity-alt"></em><span>Earn
                                                             Rewards</span></a>
-                                                </li>
+                                                </li> --}}
                                             </ul>
                                         </div>
                                         <div class="dropdown-inner">
                                             <ul class="link-list">
                                                 <li>
-                                                    <a href="#"><em class="icon ni ni-signout"></em><span>Sign
+                                                    <a href="{{ route('auth.logout') }}"><em class="icon ni ni-signout"></em><span>Sign
                                                             out</span></a>
                                                 </li>
                                             </ul>

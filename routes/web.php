@@ -6,6 +6,8 @@ use App\Http\Controllers\Account\SetupAccountController;
 use App\Http\Controllers\Account\VerifyAccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileActivityController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\UserMetaDataController;
 use Illuminate\Support\Facades\Route;
@@ -60,7 +62,9 @@ Route::group(['prefix' => 'account', 'middleware' => 'auth'], function () {
     Route::get('/products', [ProductController::class, 'index'])->name('dashboard.investment.products');
     Route::get('/top-up', [DashboardController::class, 'topupBalancePage'])->name('dashboard.topupBalancePage');
     Route::post('/top-up', [DashboardController::class, 'submitTopUpRequest'])->name('dashboard.topup.submit');
-
+    Route::get('/profile-activity', [ProfileActivityController::class, 'index'])->name('page.profileActivity');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('page.profile');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     // Switch account type
     Route::post('toggle-active-account', [DashboardController::class, 'toggleActiveAccount'])->name('dashboard.toggleActiveAccount');
     Route::post('refresh-demo-balance', [DashboardController::class, 'refreshDemoBalance'])->name('dashboard.refreshDemoBalance');
