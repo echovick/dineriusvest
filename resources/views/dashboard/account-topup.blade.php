@@ -228,7 +228,7 @@
                                             </div>
                                             <input type="text" name="paymentMethodInput" id="paymentMethodInput" hidden>
                                             <div class="nk-iv-wg4-sub text-center bg-lighter">
-                                                <button class="btn btn-lg btn-primary ttu" id="submitButton" type="submit">Confirm &amp;
+                                                <button class="btn btn-lg btn-primary ttu" id="submitButton" type="submit" style="display: none;">Confirm &amp;
                                                     proceed</button>
                                             </div>
                                         </div>
@@ -256,6 +256,15 @@
         const paymentMethodDetails = document.getElementById('paymentMethodDetails');
         const submitButton = document.getElementById('submitButton');
         const paymentMethodInput = document.getElementById('paymentMethodInput');
+
+        selectedPaymentMethod.innerHTML = 'Debit / Credit Card';
+            selectedPaymentMethodDesc.innerHTML = 'Top up your account using your debit or credit card';
+            selectedPaymentMethod2.innerHTML = 'Debit / Credit Card';
+            paymentMethodDetails.innerHTML = `
+                Payment with card is not available in your selected region. Please select other payment methods.
+            `;
+            submitButton.style.display = 'none';
+            paymentMethodInput.value = 'card';
 
         // Add an event listener to each radio button
         radioButtons.forEach(function(radioButton) {

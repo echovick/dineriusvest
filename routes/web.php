@@ -64,7 +64,10 @@ Route::group(['prefix' => 'account', 'middleware' => 'auth'], function () {
     Route::post('/top-up', [DashboardController::class, 'submitTopUpRequest'])->name('dashboard.topup.submit');
     Route::get('/profile-activity', [ProfileActivityController::class, 'index'])->name('page.profileActivity');
     Route::get('/profile', [ProfileController::class, 'index'])->name('page.profile');
+    Route::get('/settings', [ProfileController::class, 'settings'])->name('page.profile-settings');
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+    Route::get('/change-password', [ProfileController::class, 'changePassword'])->name('page.changePassword');
+    Route::post('/submit-change-password', [ProfileController::class, 'submitChangePasword'])->name('dashboard.change-password.submit');
     // Switch account type
     Route::post('toggle-active-account', [DashboardController::class, 'toggleActiveAccount'])->name('dashboard.toggleActiveAccount');
     Route::post('refresh-demo-balance', [DashboardController::class, 'refreshDemoBalance'])->name('dashboard.refreshDemoBalance');

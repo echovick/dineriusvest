@@ -133,11 +133,11 @@
                                                     class="nk-menu-text">Customer Service</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="scheme-details.html" class="nk-menu-link"><span
+                                            <a href="{{ asset('docs/dv-2022-report.pdf') }}" class="nk-menu-link"><span
                                                     class="nk-menu-text">Our Quarterly Reports</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="scheme-details.html" class="nk-menu-link"><span
+                                            <a href="#" class="nk-menu-link"><span
                                                     class="nk-menu-text">Guide</span></a>
                                         </li>
                                     </ul>

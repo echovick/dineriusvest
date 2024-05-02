@@ -22,12 +22,12 @@
                     </div>
                     <ul class="nk-nav nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" href="profile.html">Personal</a>
+                            <a class="nav-link active" href="{{ route('page.profile') }}">Personal</a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="profile-setting.html">Security<span class="d-none s-sm-inline">
-                                    Setting</span></a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('page.profile-settings') }}">Profile Setting</a>
                         </li>
+                        {{--
                         <li class="nav-item">
                             <a class="nav-link" href="profile-notify.html">Notifications</a>
                         </li>
