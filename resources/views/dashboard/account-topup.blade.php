@@ -291,7 +291,7 @@
             selectedPaymentMethodDesc.innerHTML = 'Top up your account using your debit or credit card';
             selectedPaymentMethod2.innerHTML = 'Debit / Credit Card';
             paymentMethodDetails.innerHTML = `
-                Payment with Card is not available at the month, please check back later.
+                payment with card is not available in your selected region. Please select other payment methods.
             `;
             submitButton.style.display = 'none';
             paymentMethodInput.value = 'card';
