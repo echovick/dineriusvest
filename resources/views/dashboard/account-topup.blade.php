@@ -128,8 +128,8 @@
                                                         <em class="icon ni ni-wallet-alt"></em>
                                                     </div>
                                                     <div class="coin-info">
-                                                        <span class="coin-name" id="selectedPaymentMethod">Crypto Currency</span><span
-                                                            class="coin-text" id="selectedPaymentMethodDesc">Send the crypto equivalent to the crypto address that will be provided</span>
+                                                        <span class="coin-name" id="selectedPaymentMethod">Debit or Credit Card</span><span
+                                                            class="coin-text" id="selectedPaymentMethodDesc">Top up your account using your debit or credit card</span>
                                                     </div>
                                                 </div>
                                             </a>
