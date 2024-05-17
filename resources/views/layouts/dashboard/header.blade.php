@@ -76,20 +76,21 @@
                         </div>
                         <div class="nk-header-brand">
                             <a href="{{ url('account') }}" class="logo-link"><img class="logo-light logo-img"
-                                    src="{{ asset('img/logo2.png') }}" srcset="{{ asset('img/logo2.png') }}" alt="logo" /><img
-                                    class="logo-dark logo-img" src="{{ asset('img/logo2.png') }}"
+                                    src="{{ asset('img/logo2.png') }}" srcset="{{ asset('img/logo2.png') }}"
+                                    alt="logo" /><img class="logo-dark logo-img" src="{{ asset('img/logo2.png') }}"
                                     srcset="{{ asset('img/logo2.png') }}" alt="logo-dark" />
-                                    {{-- <span class="nio-version">Invest</span> --}}
-                                </a>
+                                {{-- <span class="nio-version">Invest</span> --}}
+                            </a>
                         </div>
                         <div class="nk-header-menu" data-content="headerNav">
                             <div class="nk-header-mobile">
                                 <div class="nk-header-brand">
                                     <a href="{{ url('account') }}" class="logo-link"><img class="logo-light logo-img"
                                             src="{{ asset('img/logo2.png') }}" srcset="{{ asset('img/logo2.png') }}"
-                                            alt="logo" /><img class="logo-dark logo-img" src="{{ asset('img/logo2.png') }}"
-                                            srcset="{{ asset('img/logo2.png') }}" alt="logo-dark" />
-                                            {{-- <span class="nio-version">Invest</span> --}}
+                                            alt="logo" /><img class="logo-dark logo-img"
+                                            src="{{ asset('img/logo2.png') }}" srcset="{{ asset('img/logo2.png') }}"
+                                            alt="logo-dark" />
+                                        {{-- <span class="nio-version">Invest</span> --}}
                                     </a>
                                 </div>
                                 <div class="nk-menu-trigger me-n2">
@@ -125,11 +126,11 @@
                                             class="nk-menu-text">DIC</span></a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="welcome.html" class="nk-menu-link"><span
+                                            <a href="{{ url('support-center') }}" class="nk-menu-link"><span
                                                     class="nk-menu-text">Consult Our Experts</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{ url('contact') }}" class="nk-menu-link"><span
+                                            <a href="{{ url('support-center') }}" class="nk-menu-link"><span
                                                     class="nk-menu-text">Customer Service</span></a>
                                         </li>
                                         <li class="nk-menu-item">
@@ -388,7 +389,8 @@
                                         <div class="dropdown-inner">
                                             <ul class="link-list">
                                                 <li>
-                                                    <a href="{{ route('auth.logout') }}"><em class="icon ni ni-signout"></em><span>Sign
+                                                    <a href="{{ route('auth.logout') }}"><em
+                                                            class="icon ni ni-signout"></em><span>Sign
                                                             out</span></a>
                                                 </li>
                                             </ul>

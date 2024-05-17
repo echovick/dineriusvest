@@ -72,7 +72,7 @@
                                                         d="M33.73,105.39,78.66,98.1a3.41,3.41,0,0,0,2.84-3.94L69.4,25.05a3.5,3.5,0,0,0-4-2.82L20.44,29.51a3.41,3.41,0,0,0-2.84,3.94l12.1,69.11A3.52,3.52,0,0,0,33.73,105.39Z"
                                                         transform="translate(-4 -2.1)" fill="#c4cefe" />
                                                     <rect x="22" y="17.9" width="66" height="88"
-                                                        rx="3" ry="3" fill="#6576ff" />
+                                                        rx="3" ry="3" fill="#C99C3B" />
                                                     <rect x="31" y="85.9" width="48" height="10"
                                                         rx="1.5" ry="1.5" fill="#fff" />
                                                     <rect x="31" y="27.9" width="48" height="5"
@@ -164,10 +164,10 @@
                                                 transform="translate(0 -1)" fill="#798bff" />
                                             <path
                                                 d="M61.444,41H40.111L33,48.143V19.7A3.632,3.632,0,0,1,36.556,16H61.444A3.632,3.632,0,0,1,65,19.7V37.3A3.632,3.632,0,0,1,61.444,41Z"
-                                                transform="translate(0 -1)" fill="#6576ff" />
+                                                transform="translate(0 -1)" fill="#C99C3B" />
                                             <path
                                                 d="M61.444,41H40.111L33,48.143V19.7A3.632,3.632,0,0,1,36.556,16H61.444A3.632,3.632,0,0,1,65,19.7V37.3A3.632,3.632,0,0,1,61.444,41Z"
-                                                transform="translate(0 -1)" fill="none" stroke="#6576ff"
+                                                transform="translate(0 -1)" fill="none" stroke="#C99C3B"
                                                 stroke-miterlimit="10" stroke-width="2" />
                                             <line x1="40" y1="22" x2="57" y2="22"
                                                 fill="none" stroke="#fffffe" stroke-linecap="round"

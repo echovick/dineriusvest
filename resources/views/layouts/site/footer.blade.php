@@ -117,6 +117,7 @@
                         <li><a href="#">Policies</a></li>
                         <li><a href="{{ url('contact') }}">Public relations</a></li>
                         <li><a href="#">Careers</a></li>
+                        <li><a href="{{ url('support-center') }}">Support Center</a></li>
                     </ul>
                 </div>
                 <div class="uk-width-expand@m uk-text-right@m">

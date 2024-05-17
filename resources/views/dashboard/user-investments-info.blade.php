@@ -262,7 +262,7 @@
                                             <div class="nk-iv-wg5-ck">
                                                 <input type="text" class="knob-half"
                                                     value="{{ number_format($profitChangePercentage, 2) }}"
-                                                    data-fgColor="#6576ff" data-bgColor="#d9e5f7" data-thickness=".06"
+                                                    data-fgColor="#C99C3B" data-bgColor="#d9e5f7" data-thickness=".06"
                                                     data-width="300" data-height="155" data-displayInput="false" />
                                                 <div class="nk-iv-wg5-ck-result">
                                                     <div class="text-lead">

@@ -20,7 +20,7 @@
                                 <p class="uk-margin-small-top"><b>United Kingdom:</b> 4 Kinnoull Street, Perth, Scotland, PH1 5EN. United Kingdom</p>
                                 <p class="uk-margin-small-top"><b>United States:</b> 311 S WACKER DR, CHICAGO, 60606, IL, United States</p>
                                 <h4 class="uk-margin-medium-top uk-margin-remove-bottom">Message us</h4>
-                                <p class="uk-margin-small-top">hello@company.com<br>(888)234-5686</p>
+                                <p class="uk-margin-small-top">info@denariusvest.com<br>(888)234-5686</p>
                                 <div class="uk-margin-medium-top in-wave-socials-contact">
                                     <a href="#"
                                         class="fab fa-facebook-square fa-lg uk-text-decoration-none uk-margin-right"></a>

@@ -67,4 +67,9 @@ class SiteController extends Controller
     {
         return view('site.risk-management');
     }
+
+    public function supportCenter()
+    {
+        return view('site.support-center');
+    }
 }

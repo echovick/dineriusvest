@@ -36,6 +36,7 @@ Route::group(['prefix' => ''], function () {
     Route::get('/risk-management', [SiteController::class, 'riskManagement'])->name('site.risk-management');
     Route::get('/products', [SiteController::class, 'products'])->name('site.products');
     Route::get('/guide', [SiteController::class, 'guide'])->name('site.guide');
+    Route::get('/support-center', [SiteController::class, 'supportCenter'])->name('site.support-center');
     Route::get('/education', [SiteController::class, 'education'])->name('site.education');
     Route::get('/education/{chapter}', [SiteController::class, 'educationChapterInfo'])->name('site.education.chapter');
     Route::get('/contact', [SiteController::class, 'contact'])->name('site.contact');
