@@ -87,7 +87,7 @@
                                     <a class="uk-margin-right" href="#"><i
                                             class="fas fa-comment-alt uk-margin-small-right"></i>Live Chat</a>
                                     <a href="#"><i
-                                            class="fas fa-phone-alt uk-margin-small-right uk-margin-small-left"></i>1-800-123-4567</a>
+                                            class="fas fa-phone-alt uk-margin-small-right uk-margin-small-left"></i>+1-702-793-2495</a>
                                 </div>
                             </div>
                         </div>
