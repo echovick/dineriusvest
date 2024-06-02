@@ -17,9 +17,12 @@
     <!-- preload assets -->
     <link rel="preload" href="{{ asset('fonts/fa-brands-400.woff2') }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ asset('fonts/fa-solid-900.woff2') }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ asset('fonts/rubik-v9-latin-regular.woff2') }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ asset('fonts/rubik-v9-latin-500.woff2') }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ asset('fonts/rubik-v9-latin-300.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('fonts/rubik-v9-latin-regular.woff2') }}" as="font" type="font/woff2"
+        crossorigin>
+    <link rel="preload" href="{{ asset('fonts/rubik-v9-latin-500.woff2') }}" as="font" type="font/woff2"
+        crossorigin>
+    <link rel="preload" href="{{ asset('fonts/rubik-v9-latin-300.woff2') }}" as="font" type="font/woff2"
+        crossorigin>
     <link rel="preload" href="{{ asset('css/style.css') }}" as="style">
     <link rel="preload" href="{{ asset('js/vendors/uikit.min.js') }}" as="script">
     <link rel="preload" href="{{ asset('js/utilities.min.js') }}" as="script">
@@ -51,7 +54,8 @@
                 data-uk-sticky="show-on-up: true; top: 80; animation: uk-animation-fade">
                 <div class="uk-container" data-uk-navbar>
                     <div class="uk-navbar-left uk-width-expand uk-flex uk-flex-between">
-                        <a class="uk-navbar-item uk-logo" href="{{ url('/') }}" data-logo-inverse="sticky-only: true">
+                        <a class="uk-navbar-item uk-logo" href="{{ url('/') }}"
+                            data-logo-inverse="sticky-only: true">
                             <img src="{{ asset('img/logo2.png') }}" alt="logo" style="width: 65px">
                         </a>
                         <ul class="uk-navbar-nav uk-visible@m">
@@ -94,7 +98,7 @@
                                     <a class="uk-margin-right" href="#"><i
                                             class="fas fa-comment-alt uk-margin-small-right"></i>Live Chat</a>
                                     <a href="#"><i
-                                            class="fas fa-phone-alt uk-margin-small-right uk-margin-small-left"></i>1-800-123-4567</a>
+                                            class="fas fa-phone-alt uk-margin-small-right uk-margin-small-left"></i>+1-702-793-2495</a>
                                 </div>
                             </div>
                         </div>
